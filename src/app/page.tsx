@@ -7,10 +7,16 @@ import ProtectionSuite from '@/components/safex/ProtectionSuite';
 import ScamAwarenessModule from '@/components/safex/ScamAwarenessModule';
 import ImpactDashboard from '@/components/safex/ImpactDashboard';
 import Scrollytelling from '@/components/safex/Scrollytelling';
+import EmergencySOS from '@/components/safex/EmergencySOS';
+import Hero from '@/components/safex/Hero';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useLanguage } from '@/context/LanguageContext';
+import { Info } from 'lucide-react';
 
 export default function Home() {
+  const { t } = useLanguage();
   const [showStory, setShowStory] = useState(true);
+  const [isSOSOpen, setIsSOSOpen] = useState(false);
 
   return (
     <main className="min-h-screen relative overflow-x-hidden selection:bg-[#00FF9D]/30 selection:text-white flex flex-col">
@@ -34,13 +40,16 @@ export default function Home() {
             <div className="fixed top-0 left-0 right-0 h-[500px] bg-[#00FF9D] opacity-[0.03] blur-[100px] -z-10" />
             <div className="fixed inset-0 bg-[#030303] -z-20" />
 
-            <Header />
+            <Header 
+               onSOSClick={() => setIsSOSOpen(true)} 
+            />
 
             <div className="flex-1 flex overflow-hidden">
               <RealTimeDashboard />
             </div>
 
             <div className="container mx-auto px-4 mt-20">
+              <Hero />
               <ProtectionSuite />
               <ScamAwarenessModule />
               <ImpactDashboard />
@@ -48,6 +57,11 @@ export default function Home() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Emergency SOS Overlay */}
+      <EmergencySOS isOpen={isSOSOpen} onClose={() => setIsSOSOpen(false)} />
+
+
 
       {/* Footer / Copyright */}
       <footer className="py-16 border-t border-white/5 bg-black/40 backdrop-blur-md relative overflow-hidden">
