@@ -26,11 +26,11 @@ export default function Header() {
       <nav className="hidden md:flex items-center gap-10">
         <button className="text-sm font-bold uppercase tracking-widest text-[#00FF9D] hover:text-[#00FF9D]/80 transition-all">Protect</button>
         <button className="text-sm font-bold uppercase tracking-widest text-white/40 hover:text-white transition-all">Features</button>
-        <button 
+        <button
           onClick={() => document.getElementById('training-module')?.scrollIntoView({ behavior: 'smooth' })}
           className="text-sm font-black uppercase tracking-[0.2em] text-[#00FF9D] hover:text-[#00FF9D]/80 transition-all flex items-center gap-2"
         >
-           <Award className="w-4 h-4" /> Training
+          <Award className="w-4 h-4" /> Training
         </button>
         <button className="text-sm font-bold uppercase tracking-widest text-white/40 hover:text-white transition-all">Impact</button>
       </nav>
@@ -40,19 +40,19 @@ export default function Header() {
           <ShieldCheck className="w-4 h-4" />
           {t('local_processing')}
         </Badge>
-        
+
         <div className="flex items-center bg-white/5 rounded-full p-1 border border-white/10">
-          <Button 
-            variant="ghost" 
-            size="sm" 
+          <Button
+            variant="ghost"
+            size="sm"
             className={`rounded-full h-10 px-4 text-sm font-bold ${language === 'en' ? 'bg-[#00FF9D]/20 text-[#00FF9D] hover:bg-[#00FF9D]/30 hover:text-[#00FF9D]' : 'text-white/60 hover:text-white'}`}
             onClick={() => setLanguage('en')}
           >
             EN
           </Button>
-          <Button 
-            variant="ghost" 
-            size="sm" 
+          <Button
+            variant="ghost"
+            size="sm"
             className={`rounded-full h-10 px-4 text-sm font-bold ${language === 'kn' ? 'bg-[#00FF9D]/20 text-[#00FF9D] hover:bg-[#00FF9D]/30 hover:text-[#00FF9D]' : 'text-white/60 hover:text-white'}`}
             onClick={() => setLanguage('kn')}
           >
