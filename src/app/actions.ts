@@ -4,8 +4,8 @@ import dns from 'dns/promises';
 
 export async function scanUrl(url: string) {
   try {
-    // The API key provided by the user
-    const apiKey = '019d382a-fcf4-706b-91fc-dd29be625ca1';
+    // API Keys from environment variables
+    const apiKey = process.env.URLSCAN_API_KEY || '';
     
     // Extract hostname for search API
     let searchUrl = url;
@@ -20,8 +20,8 @@ export async function scanUrl(url: string) {
       next: { revalidate: 0 } // no cache
     });
     
-    // ABIUSE IPDB Threat Intel API
-    const threatKey = '7258cf9d0be9af2b8409dff5574edec4464f5b1bd23163c54d0426f727d848b36f347100bd9f97fd';
+    // ABUSE IPDB Threat Intel API
+    const threatKey = process.env.ABUSEIPDB_API_KEY || '';
     let abuseFlags: string[] = [];
     let isMaliciousIp = false;
     let threatScore = 0;
@@ -56,7 +56,7 @@ export async function scanUrl(url: string) {
       const uhReq = await fetch('https://urlhaus-api.abuse.ch/v1/url/', {
         method: 'POST',
         headers: {
-          'Auth-Key': '771ff3036eb5105553f3587798a049f73d7fd534cde1125e',
+          'Auth-Key': process.env.URLHAUS_API_KEY || '',
           'Content-Type': 'application/x-www-form-urlencoded'
         },
         body: formBody
