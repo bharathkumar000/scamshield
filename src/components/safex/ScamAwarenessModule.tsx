@@ -141,16 +141,16 @@ export default function ScamAwarenessModule() {
   };
 
   return (
-    <section className="py-24 px-6 max-w-6xl mx-auto border-t border-white/5 bg-black/20 rounded-[3rem] my-20">
+    <section className="py-16 px-6 max-w-6xl mx-auto mb-10">
       <div className="text-center mb-16">
         <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#00FF9D]/10 border border-[#00FF9D]/20 rounded-full mb-6">
           <Award className="w-4 h-4 text-[#00FF9D]" />
           <span className="text-[10px] font-black uppercase text-[#00FF9D] tracking-widest">{t('training_active')}</span>
         </div>
-        <h3 className="text-5xl font-black mb-6 tracking-tight uppercase text-gradient">
+        <h3 className="text-3xl md:text-4xl font-black mb-6 tracking-tight uppercase text-gradient">
           {t('awareness')}
         </h3>
-        <p className="text-white/40 text-lg max-w-2xl mx-auto font-medium">
+        <p className="text-white/40 text-base max-w-xl mx-auto font-medium">
           {language === 'kn' ? 'ವಂಚನೆ ಪತ್ತೆಹಚ್ಚುವ ಕಲೆಯ ಮೇಲೆ ಪ್ರಭುತ್ವ ಸಾಧಿಸಿ. ನಿಮ್ಮ ಸ್ಕ್ಯಾಮ್ ಐಕ್ಯೂ ಅನ್ನು ವೃದ್ಧಿಸಿ.' : 'Master the art of detection. Test your instincts against real vs. fake digital interactions and build your Scam IQ.'}
         </p>
       </div>
@@ -328,10 +328,11 @@ export default function ScamAwarenessModule() {
                               </h4>
                            </div>
                            
-                           <p className="text-white/70 text-lg leading-relaxed mb-8">
-                             {scenario.explanation}
+                           <p className="text-white/60 text-base mb-8 leading-relaxed max-w-md font-medium">
+                             Safex is more than a tool—it's a mission to protect the socio-economic well-being of Indian families. 
+                             By preventing just one scam, we protect a student's fee, a family's savings, and their peace of mind.
                            </p>
-
+                           
                            <div className="flex flex-wrap gap-3 mb-8">
                               {scenario.clues.map(clue => (
                                 <span key={clue} className="px-4 py-2 bg-black/40 border border-white/10 rounded-full text-xs font-bold text-white/60">

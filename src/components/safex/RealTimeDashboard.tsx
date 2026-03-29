@@ -78,7 +78,7 @@ export default function RealTimeDashboard() {
   return (
     <div className="flex flex-col lg:flex-row w-full h-full min-h-[700px] border-b border-white/5 bg-black/40">
       {/* Sidebar: Constraint Toggles */}
-      <aside className="w-full lg:w-[320px] border-b lg:border-b-0 lg:border-r border-white/5 p-6 flex flex-col gap-6 bg-black/40 lg:bg-transparent">
+      <aside className="w-full lg:w-[260px] border-b lg:border-b-0 lg:border-r border-white/5 p-4 flex flex-col gap-4 bg-black/40 lg:bg-transparent">
         <div className="flex items-center gap-2 mb-2">
           <Info className="w-4 h-4 text-white/40" />
           <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-white/40">Constraint Toggles</h3>
@@ -117,15 +117,15 @@ export default function RealTimeDashboard() {
       </aside>
 
       {/* Main Command Center */}
-      <main className="flex-1 p-4 md:p-8 flex flex-col gap-8 overflow-x-hidden">
+      <main className="flex-1 p-3 md:p-6 flex flex-col gap-6 overflow-x-hidden">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-4 text-center sm:text-left">
             <div className="hidden sm:flex w-12 h-12 bg-[#00FF9D]/10 rounded-xl items-center justify-center border border-[#00FF9D]/20 shrink-0">
               <Shield className="w-6 h-6 text-[#00FF9D]" />
             </div>
             <div>
-              <h2 className="text-xl md:text-2xl font-black text-white uppercase tracking-tight">Real-Time Scam Shield</h2>
-              <p className="text-white/40 text-xs md:text-sm font-medium">Prevent scams before they happen • Instant Analysis Engine</p>
+              <h2 className="text-lg md:text-xl font-black text-white uppercase tracking-tight">Real-Time Scam Shield</h2>
+              <p className="text-white/40 text-[10px] md:text-xs font-medium">Prevent scams before they happen • Instant Analysis Engine</p>
             </div>
           </div>
           <div className="flex items-center gap-2 px-4 py-2 bg-[#00FF9D]/5 border border-[#00FF9D]/20 rounded-full shrink-0">
@@ -136,23 +136,23 @@ export default function RealTimeDashboard() {
 
         <section className="bg-white/[0.02] border border-white/5 rounded-[1.5rem] md:rounded-[2rem] p-6 md:p-10 flex flex-col gap-8">
           <div className="flex items-center gap-3">
-            <Activity className="w-5 h-5 text-[#00FF9D]" />
-            <h3 className="text-xl md:text-2xl font-black text-white uppercase tracking-tight">Data Extraction Engine</h3>
+            <Activity className="w-4 h-4 text-[#00FF9D]" />
+            <h3 className="text-lg md:text-xl font-black text-white uppercase tracking-tight">Data Extraction Engine</h3>
           </div>
 
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full gap-10">
-            <TabsList className="bg-black/80 border border-white/10 p-1.5 rounded-2xl h-16 w-full flex items-stretch">
-              <TabsTrigger value="url" className="flex-1 rounded-xl h-full data-[state=active]:bg-[#00FF9D]/10 data-[state=active]:text-[#00FF9D] gap-3 text-xs md:text-sm font-black uppercase tracking-[0.2em] transition-all">
-                <Link2 className="w-4 h-4" /> URL Link
+            <TabsList className="bg-black/80 border border-white/10 p-1 rounded-xl h-12 w-full flex items-stretch">
+              <TabsTrigger value="url" className="flex-1 rounded-lg h-full data-[state=active]:bg-[#00FF9D]/10 data-[state=active]:text-[#00FF9D] gap-2 text-[10px] font-black uppercase tracking-widest transition-all">
+                <Link2 className="w-3.5 h-3.5" /> URL Link
               </TabsTrigger>
-              <TabsTrigger value="message" className="flex-1 rounded-xl h-full data-[state=active]:bg-[#00FF9D]/10 data-[state=active]:text-[#00FF9D] gap-3 text-xs md:text-sm font-black uppercase tracking-[0.2em] transition-all">
-                <MessageSquareText className="w-4 h-4" /> Message
+              <TabsTrigger value="message" className="flex-1 rounded-lg h-full data-[state=active]:bg-[#00FF9D]/10 data-[state=active]:text-[#00FF9D] gap-2 text-[10px] font-black uppercase tracking-widest transition-all">
+                <MessageSquareText className="w-3.5 h-3.5" /> Message
               </TabsTrigger>
-              <TabsTrigger value="call" className="flex-1 rounded-xl h-full data-[state=active]:bg-[#00FF9D]/10 data-[state=active]:text-[#00FF9D] gap-3 text-xs md:text-sm font-black uppercase tracking-[0.2em] transition-all">
-                <PhoneIncoming className="w-4 h-4" /> Incoming Call
+              <TabsTrigger value="call" className="flex-1 rounded-lg h-full data-[state=active]:bg-[#00FF9D]/10 data-[state=active]:text-[#00FF9D] gap-2 text-[10px] font-black uppercase tracking-widest transition-all">
+                <PhoneIncoming className="w-3.5 h-3.5" /> Incoming Call
               </TabsTrigger>
-              <TabsTrigger value="payment" className="flex-1 rounded-xl h-full data-[state=active]:bg-[#00FF9D]/10 data-[state=active]:text-[#00FF9D] gap-3 text-xs md:text-sm font-black uppercase tracking-[0.2em] transition-all">
-                <Wallet2 className="w-4 h-4" /> Payment
+              <TabsTrigger value="payment" className="flex-1 rounded-lg h-full data-[state=active]:bg-[#00FF9D]/10 data-[state=active]:text-[#00FF9D] gap-2 text-[10px] font-black uppercase tracking-widest transition-all">
+                <Wallet2 className="w-3.5 h-3.5" /> Payment
               </TabsTrigger>
             </TabsList>
 
@@ -165,7 +165,7 @@ export default function RealTimeDashboard() {
                      value={inputText}
                      onChange={(e) => setInputText(e.target.value)}
                      placeholder="e.g., Dear user, your account has been blocked. Immediate action required..."
-                     className="w-full h-64 bg-black/80 border-2 border-white/5 rounded-[2.5rem] p-10 text-2xl md:text-3xl text-white placeholder:text-white/5 focus:border-[#00FF9D]/60 focus:outline-none transition-all resize-none relative z-10 leading-relaxed shadow-2xl"
+                     className="w-full h-40 bg-black/80 border-2 border-white/5 rounded-2xl p-6 text-xl md:text-2xl text-white placeholder:text-white/5 focus:border-[#00FF9D]/60 focus:outline-none transition-all resize-none relative z-10 leading-relaxed shadow-2xl"
                    />
                  </div>
                </div>
@@ -206,13 +206,13 @@ export default function RealTimeDashboard() {
                  <p className="text-sm font-black text-[#00FF9D]/80 uppercase tracking-[0.3em]">Scan Target URL</p>
                  <div className="relative group w-full">
                    <div className="absolute inset-0 bg-gradient-to-r from-[#00FF9D]/15 to-transparent blur-3xl opacity-0 group-hover:opacity-100 transition-opacity" />
-                   <input 
-                     type="text"
-                     value={activeTab === 'url' ? inputText : ''}
-                     onChange={(e) => setInputText(e.target.value)}
-                     placeholder="e.g., https://bit.ly/secure-login-v4"
-                     className="w-full h-20 md:h-24 bg-black/80 border-2 border-white/5 rounded-[1.5rem] md:rounded-[2rem] px-10 text-2xl md:text-3xl text-white placeholder:text-white/5 focus:border-[#00FF9D]/60 focus:outline-none transition-all relative z-10 shadow-2xl"
-                   />
+                    <input 
+                      type="text"
+                      value={activeTab === 'url' ? inputText : ''}
+                      onChange={(e) => setInputText(e.target.value)}
+                      placeholder="e.g., https://bit.ly/secure-login-v4"
+                      className="w-full h-16 md:h-20 bg-black/80 border-2 border-white/5 rounded-xl md:rounded-2xl px-6 text-xl md:text-2xl text-white placeholder:text-white/5 focus:border-[#00FF9D]/60 focus:outline-none transition-all relative z-10 shadow-2xl"
+                    />
                  </div>
                </div>
                
@@ -231,12 +231,12 @@ export default function RealTimeDashboard() {
                  <p className="text-sm font-black text-[#00FF9D]/80 uppercase tracking-[0.3em]">VoIP / Telephony Stream</p>
                  <div className="relative group w-full">
                    <div className="absolute inset-0 bg-gradient-to-r from-[#00FF9D]/15 to-transparent blur-3xl opacity-0 group-hover:opacity-100 transition-opacity" />
-                   <textarea 
-                     value={activeTab === 'call' ? inputText : ''}
-                     onChange={(e) => setInputText(e.target.value)}
-                     placeholder="e.g., Transcription: This is Mark from Windows support. Your computer has been compromised..."
-                     className="w-full h-64 bg-black/80 border-2 border-white/5 rounded-[2.5rem] p-10 text-2xl md:text-3xl text-white placeholder:text-white/5 focus:border-[#00FF9D]/60 focus:outline-none transition-all resize-none relative z-10 leading-relaxed shadow-2xl"
-                   />
+                    <textarea 
+                      value={activeTab === 'call' ? inputText : ''}
+                      onChange={(e) => setInputText(e.target.value)}
+                      placeholder="e.g., Transcription: This is Mark from Windows support. Your computer has been compromised..."
+                      className="w-full h-48 bg-black/80 border-2 border-white/5 rounded-2xl p-6 text-xl md:text-2xl text-white placeholder:text-white/5 focus:border-[#00FF9D]/60 focus:outline-none transition-all resize-none relative z-10 leading-relaxed shadow-2xl"
+                    />
                  </div>
                </div>
                
@@ -316,13 +316,13 @@ export default function RealTimeDashboard() {
       </main>
 
       {/* Analysis Result Area (Right) */}
-      <aside className="w-full lg:w-[400px] border-t lg:border-t-0 lg:border-l border-white/5 p-6 md:p-8 flex flex-col gap-6 bg-black/40 lg:bg-black/20 overflow-hidden relative">
+      <aside className="w-full lg:w-[340px] border-t lg:border-t-0 lg:border-l border-white/5 p-6 md:p-8 flex flex-col gap-6 bg-black/40 lg:bg-black/20 overflow-hidden relative">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[500px] aspect-square -z-10 opacity-20 pointer-events-none">
            <div className="absolute inset-0 border border-[#00FF9D]/20 rounded-full animate-[ping_4s_linear_infinite]" />
            <div className="absolute inset-0 border border-[#00FF9D]/10 rounded-full animate-[ping_7s_linear_infinite] delay-1000" />
         </div>
 
-        <div className="w-full min-h-[400px] rounded-[2rem] border-2 border-dashed border-white/10 flex flex-col items-center justify-center p-6 md:p-10 text-center relative overflow-hidden backdrop-blur-xl bg-black/40">
+        <div className="w-full min-h-[350px] rounded-2xl border-2 border-dashed border-white/10 flex flex-col items-center justify-center p-6 md:p-8 text-center relative overflow-hidden backdrop-blur-xl bg-black/40">
           <AnimatePresence mode="wait">
             {!result && !isScanning && (
               <motion.div 
@@ -366,10 +366,10 @@ export default function RealTimeDashboard() {
                 animate={{ opacity: 1, y: 0 }}
                 className="w-full space-y-8"
               >
-                <div className={`p-8 rounded-[2rem] border-2 ${result.status === 'danger' ? 'bg-red-500/10 border-red-500/30 text-red-500' : 'bg-[#00FF9D]/10 border-[#00FF9D]/30 text-[#00FF9D]'}`}>
-                   {result.status === 'danger' ? <AlertTriangle className="w-16 h-16 mx-auto mb-4" /> : <CheckCircle2 className="w-16 h-16 mx-auto mb-4" />}
-                   <h5 className="text-4xl font-black mb-1">{result.score}%</h5>
-                   <p className="uppercase text-xs font-black tracking-[0.3em]">{result.status === 'danger' ? 'Scam Detected' : 'Verified Safe'}</p>
+                <div className={`p-6 rounded-2xl border-2 ${result.status === 'danger' ? 'bg-red-500/10 border-red-500/30 text-red-500' : 'bg-[#00FF9D]/10 border-[#00FF9D]/30 text-[#00FF9D]'}`}>
+                   {result.status === 'danger' ? <AlertTriangle className="w-12 h-12 mx-auto mb-4" /> : <CheckCircle2 className="w-12 h-12 mx-auto mb-4" />}
+                   <h5 className="text-3xl font-black mb-1">{result.score}%</h5>
+                   <p className="uppercase text-[9px] font-black tracking-[0.3em]">{result.status === 'danger' ? 'Scam Detected' : 'Verified Safe'}</p>
                 </div>
 
                 <div className="space-y-4 text-left">

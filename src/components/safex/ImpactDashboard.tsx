@@ -15,13 +15,13 @@ export default function ImpactDashboard() {
   ];
 
   return (
-    <section className="py-24 px-6 max-w-6xl mx-auto mb-20">
+    <section className="py-16 px-6 max-w-6xl mx-auto mb-10">
       <div className="flex flex-col md:flex-row gap-12 items-center">
         <div className="md:w-1/2">
-          <h3 className="text-5xl font-black mb-8 tracking-tight uppercase text-gradient">
+          <h3 className="text-3xl md:text-4xl font-black mb-6 tracking-tight uppercase text-gradient">
             {t('impact')}
           </h3>
-          <p className="text-white/60 text-lg mb-12 leading-relaxed max-w-lg font-medium">
+          <p className="text-white/60 text-base mb-8 leading-relaxed max-w-md font-medium">
             Safex is more than a tool—it's a mission to protect the socio-economic well-being of Indian families. 
             By preventing just one scam, we protect a student's fee, a family's savings, and their peace of mind.
           </p>

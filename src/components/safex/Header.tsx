@@ -11,7 +11,7 @@ export default function Header({ onSOSClick }: { onSOSClick: () => void }) {
   const { language, setLanguage, t } = useLanguage();
 
   return (
-    <header className="sticky top-0 z-50 w-full backdrop-blur-md border-b border-white/5 bg-black/50 px-6 py-4 flex items-center justify-between">
+    <header className="sticky top-0 z-50 w-full backdrop-blur-md border-b border-white/5 bg-black/50 px-6 py-3 flex items-center justify-between">
       <div className="flex items-center gap-2">
         <div className="bg-[#00FF9D]/10 p-2 rounded-lg border border-[#00FF9D]/20">
           <Shield className="w-6 h-6 text-[#00FF9D]" />
@@ -24,7 +24,7 @@ export default function Header({ onSOSClick }: { onSOSClick: () => void }) {
         </div>
       </div>
 
-      <nav className="hidden md:flex items-center gap-10 font-bold uppercase tracking-[0.2em] text-[10px]">
+      <nav className="hidden md:flex items-center gap-6 font-bold uppercase tracking-[0.2em] text-[9px]">
         <button className="text-[#00FF9D] hover:text-[#00FF9D]/80 transition-all">Protect</button>
         <button className="text-white/40 hover:text-white transition-all">Features</button>
         <button
@@ -43,10 +43,10 @@ export default function Header({ onSOSClick }: { onSOSClick: () => void }) {
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={onSOSClick}
-          className="h-12 px-8 rounded-2xl bg-[#FF3B3B] text-white flex items-center gap-3 font-black shadow-[0_0_20px_rgba(255,59,59,0.3)] animate-pulse hover:shadow-[0_0_40px_rgba(255,59,59,0.5)] transition-all"
+          className="h-10 px-6 rounded-xl bg-[#FF3B3B] text-white flex items-center gap-3 font-black shadow-[0_0_20px_rgba(255,59,59,0.3)] animate-pulse hover:shadow-[0_0_40px_rgba(255,59,59,0.5)] transition-all"
         >
-          <AlertTriangle className="w-5 h-5" />
-          <span className="text-xs uppercase tracking-widest">{t('sos_button')}</span>
+          <AlertTriangle className="w-4 h-4" />
+          <span className="text-[10px] uppercase tracking-widest">{t('sos_button')}</span>
         </motion.button>
         <Badge variant="outline" className="hidden md:flex items-center gap-2 border-[#00FF9D]/20 bg-[#00FF9D]/5 text-[#00FF9D] font-mono text-xs py-1 px-3">
           <ShieldCheck className="w-4 h-4" />
@@ -57,7 +57,7 @@ export default function Header({ onSOSClick }: { onSOSClick: () => void }) {
           <Button
             variant="ghost"
             size="sm"
-            className={`rounded-full h-10 px-4 text-sm font-bold ${language === 'en' ? 'bg-[#00FF9D]/20 text-[#00FF9D] hover:bg-[#00FF9D]/30 hover:text-[#00FF9D]' : 'text-white/60 hover:text-white'}`}
+            className={`rounded-full h-8 px-3 text-xs font-bold ${language === 'en' ? 'bg-[#00FF9D]/20 text-[#00FF9D] hover:bg-[#00FF9D]/30 hover:text-[#00FF9D]' : 'text-white/60 hover:text-white'}`}
             onClick={() => setLanguage('en')}
           >
             EN
@@ -65,7 +65,7 @@ export default function Header({ onSOSClick }: { onSOSClick: () => void }) {
           <Button
             variant="ghost"
             size="sm"
-            className={`rounded-full h-10 px-4 text-sm font-bold ${language === 'kn' ? 'bg-[#00FF9D]/20 text-[#00FF9D] hover:bg-[#00FF9D]/30 hover:text-[#00FF9D]' : 'text-white/60 hover:text-white'}`}
+            className={`rounded-full h-8 px-3 text-xs font-bold ${language === 'kn' ? 'bg-[#00FF9D]/20 text-[#00FF9D] hover:bg-[#00FF9D]/30 hover:text-[#00FF9D]' : 'text-white/60 hover:text-white'}`}
             onClick={() => setLanguage('kn')}
           >
             KN

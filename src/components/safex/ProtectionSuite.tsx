@@ -16,9 +16,9 @@ export default function ProtectionSuite() {
   const { t } = useLanguage();
 
   return (
-    <section className="py-20 px-6 max-w-6xl mx-auto">
+    <section className="py-16 px-6 max-w-6xl mx-auto">
       <div className="text-center mb-16">
-        <h3 className="text-4xl font-black mb-6 tracking-tight uppercase text-gradient">
+        <h3 className="text-3xl md:text-4xl font-black mb-4 tracking-tight uppercase text-gradient">
           {t('pillars')}
         </h3>
         <p className="text-white/60 text-lg max-w-2xl mx-auto font-medium">
