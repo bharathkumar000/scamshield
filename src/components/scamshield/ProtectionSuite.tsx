@@ -18,15 +18,15 @@ export default function ProtectionSuite() {
   return (
     <section className="py-20 px-6 max-w-6xl mx-auto">
       <div className="text-center mb-16">
-        <h3 className="text-3xl font-black mb-4 tracking-tight uppercase text-gradient">
+        <h3 className="text-4xl font-black mb-6 tracking-tight uppercase text-gradient">
           {t('pillars')}
         </h3>
-        <p className="text-white/40 max-w-2xl mx-auto">
+        <p className="text-white/60 text-lg max-w-2xl mx-auto font-medium">
           Multi-layer defense architecture protecting every digital entry point. 
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         {pillarData.map((pillar, index) => (
           <motion.div
             key={pillar.id}
@@ -35,15 +35,15 @@ export default function ProtectionSuite() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
           >
-            <Card className="glass-card h-full group hover:border-[#00FF9D]/40 transition-all cursor-pointer">
+            <Card className="glass-card h-full group hover:border-[#00FF9D]/40 transition-all cursor-pointer p-2">
               <CardHeader>
-                <div className="w-12 h-12 rounded-xl bg-[#00FF9D]/10 flex items-center justify-center text-[#00FF9D] mb-4 group-hover:scale-110 transition-transform">
+                <div className="w-14 h-14 rounded-2xl bg-[#00FF9D]/10 flex items-center justify-center text-[#00FF9D] mb-6 group-hover:scale-110 transition-transform">
                   {pillar.icon}
                 </div>
-                <CardTitle className="text-lg font-bold group-hover:text-[#00FF9D] transition-colors">{t(pillar.titleKey)}</CardTitle>
+                <CardTitle className="text-xl font-black group-hover:text-[#00FF9D] transition-colors mb-2 uppercase tracking-tight">{t(pillar.titleKey)}</CardTitle>
               </CardHeader>
               <CardContent>
-                <CardDescription className="text-white/40 leading-relaxed">
+                <CardDescription className="text-white/60 text-base leading-relaxed font-medium">
                   {pillar.desc}
                 </CardDescription>
               </CardContent>
