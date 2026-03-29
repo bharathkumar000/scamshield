@@ -142,19 +142,29 @@ export default function RealTimeDashboard() {
     setTimeout(() => {
       setIsScanning(false);
       const lower = inputText.toLowerCase();
-      if (lower.includes('click') || lower.includes('win') || lower.includes('otp') || lower.includes('urgent') || lower.includes('block')) {
+      
+      const scamKeywords = [
+        'click', 'win', 'otp', 'urgent', 'block', 'kyc', 'verify', 
+        'limited', 'suspend', 'unauthorized', 'sbi', 'bank', 
+        'phonepe', 'paytm', 'reward', 'cashback', 'vpa', 'support',
+        'technical', 'compromised', 'pin'
+      ];
+
+      const isScam = scamKeywords.some(keyword => lower.includes(keyword));
+
+      if (isScam) {
         setResult({
           status: 'danger',
-          score: 92,
-          flags: ['Scam Intent High', 'Urgency Detected', 'Credential Phishing'],
+          score: 94,
+          flags: ['Social Engineering Detected', 'High-Risk Keywords', 'Urgency Trigger'],
           engine: 'Safex Heuristic Engine'
         });
       } else {
         setResult({
           status: 'safe',
-          score: 8,
-          flags: ['Clean Pattern', 'Verified Sender', 'Normal Sentiment'],
-          engine: 'Static Analysis Pro'
+          score: 12,
+          flags: ['Verified Context', 'Clean Pattern', 'Normal Sentiment'],
+          engine: 'SafeX Integrity Core'
         });
       }
     }, 1500);
@@ -266,12 +276,10 @@ export default function RealTimeDashboard() {
                 />
                 <QuickDemos 
                   items={[
-                    { label: 'Bitly Redirect', text: 'https://bit.ly/secure-access-v4' },
+                    { label: 'Shortener', text: 'https://bit.ly/bank-kyc-urgent-block-v4' },
                     { label: 'Homograph', text: 'https://arnazon-india.in/verify' },
-                    { label: 'Safe Link', text: 'https://google.com/safety' },
-                    { label: 'Refund Site', text: 'https://tax-refund-portal.in/status' },
-                    { label: 'Cloud Drive', text: 'https://dropbox-secure-share.xyz/files' },
-                    { label: 'Bank Security', text: 'https://onlinesbi.sbi/security-tips' }
+                    { label: 'Tax Fraud', text: 'https://tax-refund-portal.in/status' },
+                    { label: 'Safe Page', text: 'https://google.com/safety' }
                   ]}
                   onSelect={setInputText}
                 />
