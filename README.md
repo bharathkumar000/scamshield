@@ -1,36 +1,38 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ScamShield | Team Nexus 1 (VVCE Mysuru)
 
-## Getting Started
+**ScamShield** is an ultra-modern, full-stack cybersecurity application designed to protect users from the growing wave of digital fraud in India. Built with a focus on **Privacy by Design** and **User-Centric Heuristics**, ScamShield provide a "One-Second Warning" to stop scams before they happen.
 
-First, run the development server:
+## 🚀 Vision
+To empower every digital citizen in India with a real-time defense bridge against phishing, UPI fraud, and social engineering.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## ✨ Core Features
+- **One-Second Warning Scanner**: Real-time analysis of URLs, Phone Numbers, and UPI IDs with high-speed detection.
+- **4-Pillar Protection Suite**:
+  - **Link Scanner**: Detects phishing and lookalike domains.
+  - **Call Verifier**: Heuristically checks suspicious phone patterns.
+  - **Message Analyzer**: AI-driven analysis of urgency and fraud markers in text.
+  - **UPI Guard**: Advanced heuristic mapping of "lookalike" UPI handles.
+- **Methodology Hub**: Follows the 5-Step Design Thinking process (Empathize, Define, Ideate, Prototype, Test).
+- **Socio-Economic Dashboard**: Visualizing the impact on SDG 3 (Well-being) and SDG 4 (Education).
+- **Localized Support**: Toggle between **English** and **Kannada** for the Mysuru/local user base.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛡️ Privacy First
+ScamShield operates on **Local Processing** principles. 
+- No user data is sent to external servers for analysis.
+- All heuristics run client-side.
+- Data is discarded immediately after scan completion.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🛠️ Technical Stack
+- **Framework**: Next.js 15+ (App Router)
+- **Styling**: Tailwind CSS 4 with custom "Midnight Cyber" theme.
+- **UI Components**: Shadcn/UI (customized with glassmorphism).
+- **Animations**: Framer Motion for premium 3D-like transitions.
+- **Icons**: Lucide React.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🏆 Submission Details
+- **Team**: Nexus 1
+- **College**: Vidyavardhaka College of Engineering (VVCE), Mysuru.
+- **Competition**: Clash of Cortex 2026.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+*Built with ❤️ by Team Nexus 1 for a safer Digital India.*
