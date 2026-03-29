@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ScamShield | Team Nexus 1",
+  title: "Safex | Team Nexus 1",
   description: "Ultra-modern cybersecurity protection for the digital age. Built for Team Nexus 1, VVCE Mysuru.",
 };
 
