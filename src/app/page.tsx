@@ -1,7 +1,8 @@
-import Header from '@/components/scamshield/Header';
-import RealTimeDashboard from '@/components/scamshield/RealTimeDashboard';
-import ProtectionSuite from '@/components/scamshield/ProtectionSuite';
-import ImpactDashboard from '@/components/scamshield/ImpactDashboard';
+import Header from '@/components/safex/Header';
+import RealTimeDashboard from '@/components/safex/RealTimeDashboard';
+import ProtectionSuite from '@/components/safex/ProtectionSuite';
+import ScamAwarenessModule from '@/components/safex/ScamAwarenessModule';
+import ImpactDashboard from '@/components/safex/ImpactDashboard';
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
 
       <div className="container mx-auto px-4 mt-20">
         <ProtectionSuite />
+        <ScamAwarenessModule />
         <ImpactDashboard />
       </div>
 

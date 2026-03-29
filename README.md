@@ -1,6 +1,6 @@
-# ScamShield | Team Nexus 1 (VVCE Mysuru)
+# Safex | Team Nexus 1 (VVCE Mysuru)
 
-**ScamShield** is an ultra-modern, full-stack cybersecurity application designed to protect users from the growing wave of digital fraud in India. Built with a focus on **Privacy by Design** and **User-Centric Heuristics**, ScamShield provide a "One-Second Warning" to stop scams before they happen.
+**Safex** is an ultra-modern, full-stack cybersecurity application designed to protect users from the growing wave of digital fraud in India. Built with a focus on **Privacy by Design** and **User-Centric Heuristics**, Safex provide a "One-Second Warning" to stop scams before they happen.
 
 ## 🚀 Vision
 To empower every digital citizen in India with a real-time defense bridge against phishing, UPI fraud, and social engineering.
@@ -17,7 +17,7 @@ To empower every digital citizen in India with a real-time defense bridge agains
 - **Localized Support**: Toggle between **English** and **Kannada** for the Mysuru/local user base.
 
 ## 🛡️ Privacy First
-ScamShield operates on **Local Processing** principles. 
+Safex operates on **Local Processing** principles. 
 - No user data is sent to external servers for analysis.
 - All heuristics run client-side.
 - Data is discarded immediately after scan completion.

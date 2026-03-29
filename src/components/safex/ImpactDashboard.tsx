@@ -22,7 +22,7 @@ export default function ImpactDashboard() {
             {t('impact')}
           </h3>
           <p className="text-white/60 text-lg mb-12 leading-relaxed max-w-lg font-medium">
-            ScamShield is more than a tool—it's a mission to protect the socio-economic well-being of Indian families. 
+            Safex is more than a tool—it's a mission to protect the socio-economic well-being of Indian families. 
             By preventing just one scam, we protect a student's fee, a family's savings, and their peace of mind.
           </p>
 

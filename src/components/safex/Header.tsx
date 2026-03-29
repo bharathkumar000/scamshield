@@ -3,7 +3,7 @@
 import { useLanguage } from '@/context/LanguageContext';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Shield, ShieldCheck, Globe } from 'lucide-react';
+import { Shield, ShieldCheck, Award } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export default function Header() {
@@ -17,11 +17,23 @@ export default function Header() {
         </div>
         <div>
           <h1 className="text-2xl font-bold tracking-tighter text-white">
-            Scam<span className="text-[#00FF9D]">Shield</span>
+            Safe<span className="text-[#00FF9D]">x</span>
           </h1>
           <p className="text-[12px] text-white/70 uppercase tracking-widest">{t('nexus')}</p>
         </div>
       </div>
+
+      <nav className="hidden md:flex items-center gap-10">
+        <button className="text-sm font-bold uppercase tracking-widest text-[#00FF9D] hover:text-[#00FF9D]/80 transition-all">Protect</button>
+        <button className="text-sm font-bold uppercase tracking-widest text-white/40 hover:text-white transition-all">Features</button>
+        <button 
+          onClick={() => document.getElementById('training-module')?.scrollIntoView({ behavior: 'smooth' })}
+          className="text-sm font-black uppercase tracking-[0.2em] text-[#00FF9D] hover:text-[#00FF9D]/80 transition-all flex items-center gap-2"
+        >
+           <Award className="w-4 h-4" /> Training
+        </button>
+        <button className="text-sm font-bold uppercase tracking-widest text-white/40 hover:text-white transition-all">Impact</button>
+      </nav>
 
       <div className="flex items-center gap-4">
         <Badge variant="outline" className="hidden md:flex items-center gap-2 border-[#00FF9D]/20 bg-[#00FF9D]/5 text-[#00FF9D] font-mono text-xs py-1 px-3">

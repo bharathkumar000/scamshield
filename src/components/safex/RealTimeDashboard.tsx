@@ -66,15 +66,15 @@ export default function RealTimeDashboard() {
   };
 
   return (
-    <div className="flex w-full h-full min-h-[700px] border-b border-white/5 bg-black/40">
+    <div className="flex flex-col lg:flex-row w-full h-full min-h-[700px] border-b border-white/5 bg-black/40">
       {/* Sidebar: Constraint Toggles */}
-      <aside className="w-[300px] border-r border-white/5 p-6 flex flex-col gap-6">
+      <aside className="w-full lg:w-[320px] border-b lg:border-b-0 lg:border-r border-white/5 p-6 flex flex-col gap-6 bg-black/40 lg:bg-transparent">
         <div className="flex items-center gap-2 mb-2">
           <Info className="w-4 h-4 text-white/40" />
           <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-white/40">Constraint Toggles</h3>
         </div>
 
-        <div className="flex flex-col gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-4">
           <ToggleCard 
             icon={<Zap className="w-4 h-4" />}
             title="AI Intent Detection"
@@ -107,67 +107,67 @@ export default function RealTimeDashboard() {
       </aside>
 
       {/* Main Command Center */}
-      <main className="flex-1 p-8 flex flex-col gap-8">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 bg-[#00FF9D]/10 rounded-xl flex items-center justify-center border border-[#00FF9D]/20">
+      <main className="flex-1 p-4 md:p-8 flex flex-col gap-8 overflow-x-hidden">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
+          <div className="flex items-center gap-4 text-center sm:text-left">
+            <div className="hidden sm:flex w-12 h-12 bg-[#00FF9D]/10 rounded-xl items-center justify-center border border-[#00FF9D]/20 shrink-0">
               <Shield className="w-6 h-6 text-[#00FF9D]" />
             </div>
             <div>
-              <h2 className="text-2xl font-black text-white uppercase tracking-tight">Real-Time Scam Shield</h2>
-              <p className="text-white/40 text-sm font-medium">Prevent scams before they happen • Instant Analysis Engine</p>
+              <h2 className="text-xl md:text-2xl font-black text-white uppercase tracking-tight">Real-Time Scam Shield</h2>
+              <p className="text-white/40 text-xs md:text-sm font-medium">Prevent scams before they happen • Instant Analysis Engine</p>
             </div>
           </div>
-          <div className="flex items-center gap-2 px-4 py-2 bg-[#00FF9D]/5 border border-[#00FF9D]/20 rounded-full">
+          <div className="flex items-center gap-2 px-4 py-2 bg-[#00FF9D]/5 border border-[#00FF9D]/20 rounded-full shrink-0">
             <div className="w-2 h-2 rounded-full bg-[#00FF9D] animate-pulse" />
             <span className="text-[10px] font-black uppercase text-[#00FF9D] tracking-widest">Engine Online</span>
           </div>
         </div>
 
-        <section className="bg-white/[0.02] border border-white/5 rounded-[2rem] p-10 flex flex-col gap-8">
+        <section className="bg-white/[0.02] border border-white/5 rounded-[1.5rem] md:rounded-[2rem] p-6 md:p-10 flex flex-col gap-8">
           <div className="flex items-center gap-3">
             <Activity className="w-5 h-5 text-[#00FF9D]" />
-            <h3 className="text-2xl font-black text-white uppercase tracking-tight">Data Extraction Engine</h3>
+            <h3 className="text-xl md:text-2xl font-black text-white uppercase tracking-tight">Data Extraction Engine</h3>
           </div>
 
-          <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="bg-black/60 border border-white/10 p-1.5 rounded-2xl h-16 w-full mb-10 flex">
-              <TabsTrigger value="url" className="flex-1 rounded-xl h-full data-[state=active]:bg-[#00FF9D]/10 data-[state=active]:text-[#00FF9D] gap-3 text-sm font-black uppercase tracking-widest">
+          <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full gap-10">
+            <TabsList className="bg-black/80 border border-white/10 p-1.5 rounded-2xl h-16 w-full flex items-stretch">
+              <TabsTrigger value="url" className="flex-1 rounded-xl h-full data-[state=active]:bg-[#00FF9D]/10 data-[state=active]:text-[#00FF9D] gap-3 text-xs md:text-sm font-black uppercase tracking-[0.2em] transition-all">
                 <Link2 className="w-4 h-4" /> URL Link
               </TabsTrigger>
-              <TabsTrigger value="message" className="flex-1 rounded-xl h-full data-[state=active]:bg-[#6366f1]/20 data-[state=active]:text-[#6366f1] gap-3 text-sm font-black uppercase tracking-widest">
+              <TabsTrigger value="message" className="flex-1 rounded-xl h-full data-[state=active]:bg-[#00FF9D]/10 data-[state=active]:text-[#00FF9D] gap-3 text-xs md:text-sm font-black uppercase tracking-[0.2em] transition-all">
                 <MessageSquareText className="w-4 h-4" /> Message
               </TabsTrigger>
-              <TabsTrigger value="call" className="flex-1 rounded-xl h-full data-[state=active]:bg-[#00FF9D]/10 data-[state=active]:text-[#00FF9D] gap-3 text-sm font-black uppercase tracking-widest">
+              <TabsTrigger value="call" className="flex-1 rounded-xl h-full data-[state=active]:bg-[#00FF9D]/10 data-[state=active]:text-[#00FF9D] gap-3 text-xs md:text-sm font-black uppercase tracking-[0.2em] transition-all">
                 <PhoneIncoming className="w-4 h-4" /> Incoming Call
               </TabsTrigger>
-              <TabsTrigger value="payment" className="flex-1 rounded-xl h-full data-[state=active]:bg-[#00FF9D]/10 data-[state=active]:text-[#00FF9D] gap-3 text-sm font-black uppercase tracking-widest">
+              <TabsTrigger value="payment" className="flex-1 rounded-xl h-full data-[state=active]:bg-[#00FF9D]/10 data-[state=active]:text-[#00FF9D] gap-3 text-xs md:text-sm font-black uppercase tracking-[0.2em] transition-all">
                 <Wallet2 className="w-4 h-4" /> Payment
               </TabsTrigger>
             </TabsList>
 
-            <TabsContent value="message" className="space-y-8 animate-in fade-in slide-in-from-top-4 duration-500">
-              <div className="space-y-4">
-                <p className="text-sm font-black text-[#00FF9D]/60 uppercase tracking-[0.3em]">Paste Message Text</p>
-                <div className="relative group">
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#6366f1]/10 to-transparent blur-3xl opacity-0 group-hover:opacity-100 transition-opacity" />
+            <TabsContent value="message" className="space-y-8 animate-in fade-in duration-500 w-full">
+              <div className="space-y-4 w-full">
+                <p className="text-sm font-black text-[#00FF9D]/80 uppercase tracking-[0.3em]">Paste Message Text</p>
+                <div className="relative group w-full">
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#00FF9D]/15 to-transparent blur-3xl opacity-0 group-hover:opacity-100 transition-opacity" />
                   <textarea 
                     value={inputText}
                     onChange={(e) => setInputText(e.target.value)}
-                    placeholder="e.g., Dear user, your account has been blocked. Click here to verify..."
-                    className="w-full h-56 bg-black/60 border-2 border-white/5 rounded-[2rem] p-8 text-2xl text-white placeholder:text-white/10 focus:border-[#6366f1]/50 focus:outline-none transition-all resize-none relative z-10 leading-relaxed shadow-2xl"
+                    placeholder="e.g., Dear user, your account has been blocked. Immediate action required..."
+                    className="w-full h-64 bg-black/80 border-2 border-white/5 rounded-[2.5rem] p-10 text-2xl md:text-3xl text-white placeholder:text-white/5 focus:border-[#00FF9D]/60 focus:outline-none transition-all resize-none relative z-10 leading-relaxed shadow-2xl"
                   />
                 </div>
               </div>
 
               <div className="flex flex-col gap-4">
-                <p className="text-xs font-bold text-white/40 uppercase tracking-widest">Quick Demo Scenarios:</p>
-                <div className="flex gap-3">
-                  {['Phishing Link', 'Scam Message', 'Fake Call', 'Risky Payment'].map(s => (
+                <p className="text-[10px] font-bold text-white/40 uppercase tracking-widest">Quick Demo Scenarios:</p>
+                <div className="flex flex-wrap gap-2 md:gap-3">
+                  {['Phishing', 'Scam', 'Call', 'Payment'].map(s => (
                     <Button 
                       key={s} 
                       variant="outline" 
-                      className="rounded-xl bg-white/5 border-white/10 hover:bg-white/10 text-white/60 text-xs font-bold"
+                      className="rounded-lg bg-white/5 border-white/10 hover:bg-[#00FF9D]/10 hover:border-[#00FF9D]/30 text-white/60 text-[10px] font-bold py-1 px-3"
                       onClick={() => setInputText(`Scenario for ${s}: Verify your details now at bit.ly/secure-bank`)}
                     >
                       {s}
@@ -179,50 +179,34 @@ export default function RealTimeDashboard() {
               <Button 
                 onClick={handleScan}
                 disabled={isScanning || !inputText}
-                className="w-full h-16 rounded-[1.5rem] bg-[#6366f1] hover:bg-[#6366f1]/90 text-white text-lg font-black uppercase tracking-widest mt-4 shadow-[0_0_30px_rgba(99,102,241,0.3)] transition-all active:scale-[0.98]"
+                className="w-full h-14 md:h-16 rounded-xl md:rounded-[1.5rem] bg-[#00FF9D] hover:bg-[#00FF9D]/90 text-black text-sm md:text-lg font-black uppercase tracking-widest mt-4 shadow-[0_0_30px_rgba(0,255,157,0.3)] transition-all"
               >
-                {isScanning ? <Loader2 className="w-6 h-6 animate-spin mr-2" /> : <Search className="w-5 h-5 mr-2" />}
+                {isScanning ? <Loader2 className="w-5 h-5 md:w-6 md:h-6 animate-spin mr-2" /> : <Search className="w-4 h-4 md:w-5 md:h-5 mr-2" />}
                 Run Real-Time Analysis
               </Button>
             </TabsContent>
-            
-            <TabsContent value="url" className="space-y-8 animate-in fade-in slide-in-from-top-4 duration-500">
-              <div className="space-y-4">
-                <p className="text-sm font-black text-[#00FF9D]/60 uppercase tracking-[0.3em]">Scan Target URL</p>
-                <div className="relative group">
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#00FF9D]/10 to-transparent blur-3xl opacity-0 group-hover:opacity-100 transition-opacity" />
+
+            <TabsContent value="url" className="space-y-8 animate-in fade-in duration-500 w-full">
+              <div className="space-y-4 w-full">
+                <p className="text-sm font-black text-[#00FF9D]/80 uppercase tracking-[0.3em]">Scan Target URL</p>
+                <div className="relative group w-full">
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#00FF9D]/15 to-transparent blur-3xl opacity-0 group-hover:opacity-100 transition-opacity" />
                   <input 
                     type="text"
                     value={inputText}
                     onChange={(e) => setInputText(e.target.value)}
                     placeholder="e.g., https://bit.ly/secure-login-v4"
-                    className="w-full h-20 bg-black/60 border-2 border-white/5 rounded-[1.5rem] px-8 text-2xl text-white placeholder:text-white/10 focus:border-[#00FF9D]/50 focus:outline-none transition-all relative z-10 shadow-2xl"
+                    className="w-full h-20 md:h-24 bg-black/80 border-2 border-white/5 rounded-[1.5rem] md:rounded-[2rem] px-10 text-2xl md:text-3xl text-white placeholder:text-white/5 focus:border-[#00FF9D]/60 focus:outline-none transition-all relative z-10 shadow-2xl"
                   />
                 </div>
               </div>
-
-              <div className="flex flex-col gap-4">
-                <p className="text-xs font-bold text-white/40 uppercase tracking-widest">Quick Demo Scenarios:</p>
-                <div className="flex gap-3">
-                  {['Bank Phishing', 'Reward Link', 'KYC Update', 'Secure Login'].map(s => (
-                    <Button 
-                      key={s} 
-                      variant="outline" 
-                      className="rounded-xl bg-white/5 border-white/10 hover:bg-white/10 text-white/60 text-xs font-bold"
-                      onClick={() => setInputText(`https://secure-update-${s.toLowerCase().replace(' ', '-')}.bankpals.com/verify`)}
-                    >
-                      {s}
-                    </Button>
-                  ))}
-                </div>
-              </div>
-
+              
               <Button 
                 onClick={handleScan}
                 disabled={isScanning || !inputText}
-                className="w-full h-16 rounded-[1.5rem] bg-[#00FF9D] hover:bg-[#00FF9D]/90 text-black text-lg font-black uppercase tracking-widest mt-4 shadow-[0_0_30px_rgba(0,255,157,0.3)] transition-all active:scale-[0.98]"
+                className="w-full h-14 md:h-16 rounded-xl md:rounded-[1.5rem] bg-[#00FF9D] hover:bg-[#00FF9D]/90 text-black text-sm md:text-lg font-black uppercase tracking-widest mt-4 transition-all"
               >
-                {isScanning ? <Loader2 className="w-6 h-6 animate-spin mr-2" /> : <Search className="w-5 h-5 mr-2" />}
+                {isScanning ? <Loader2 className="w-5 h-5 md:w-6 md:h-6 animate-spin mr-2" /> : <Search className="w-4 h-4 md:w-5 md:h-5 mr-2" />}
                 Run Link Heuristics
               </Button>
             </TabsContent>
@@ -231,14 +215,13 @@ export default function RealTimeDashboard() {
       </main>
 
       {/* Analysis Result Area (Right) */}
-      <aside className="w-[450px] border-l border-white/5 p-8 flex flex-col gap-6 bg-black/20 overflow-hidden relative">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] -z-10 opacity-20 group">
+      <aside className="w-full lg:w-[400px] border-t lg:border-t-0 lg:border-l border-white/5 p-6 md:p-8 flex flex-col gap-6 bg-black/40 lg:bg-black/20 overflow-hidden relative">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[500px] aspect-square -z-10 opacity-20 pointer-events-none">
            <div className="absolute inset-0 border border-[#00FF9D]/20 rounded-full animate-[ping_4s_linear_infinite]" />
            <div className="absolute inset-0 border border-[#00FF9D]/10 rounded-full animate-[ping_7s_linear_infinite] delay-1000" />
-           <div className="absolute inset-0 border border-[#00FF9D]/5 rounded-full animate-[ping_10s_linear_infinite] delay-2000" />
         </div>
 
-        <div className="w-full h-full rounded-[2.5rem] border-2 border-dashed border-white/10 flex flex-col items-center justify-center p-10 text-center relative overflow-hidden backdrop-blur-xl bg-black/40">
+        <div className="w-full min-h-[400px] rounded-[2rem] border-2 border-dashed border-white/10 flex flex-col items-center justify-center p-6 md:p-10 text-center relative overflow-hidden backdrop-blur-xl bg-black/40">
           <AnimatePresence mode="wait">
             {!result && !isScanning && (
               <motion.div 
@@ -300,7 +283,7 @@ export default function RealTimeDashboard() {
                   </div>
                 </div>
 
-                <div className="p-4 bg-[#6366f1]/10 rounded-2xl border border-[#6366f1]/20 text-[10px] uppercase font-black text-[#6366f1] tracking-widest">
+                <div className="p-4 bg-[#00FF9D]/10 rounded-2xl border border-[#00FF9D]/20 text-[10px] uppercase font-black text-[#00FF9D] tracking-widest">
                   Processed by: {result.engine}
                 </div>
               </motion.div>

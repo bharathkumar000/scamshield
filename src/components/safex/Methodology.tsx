@@ -15,7 +15,7 @@ const timelineData = [
   { step: '01', title: 'Empathize', icon: <UserCheck className="w-4 h-4" />, desc: 'Understanding the trauma of the 11.28 lakh cybercrime victims in India.' },
   { step: '02', title: 'Define', icon: <AlertTriangle className="w-4 h-4" />, desc: 'Mapping the exact points of failure in current UPI/Call authentication systems.' },
   { step: '03', title: 'Ideate', icon: <Layers className="w-4 h-4" />, desc: 'Concept: "One-Second Warning" - stopping the scam before the victim clicks.' },
-  { step: '04', title: 'Prototype', icon: <TestTube2 className="w-4 h-4" />, desc: 'Building ScamShield: Ultra-modern, localized, and privacy-first detection.' },
+  { step: '04', title: 'Prototype', icon: <TestTube2 className="w-4 h-4" />, desc: 'Building Safex: Ultra-modern, localized, and privacy-first detection.' },
   { step: '05', title: 'Test', icon: <CheckCircle2 className="w-4 h-4" />, desc: 'Real-world validation against live scam data sets and user feedback loop.' },
 ];
 
@@ -75,7 +75,7 @@ export default function Methodology() {
                   { q: 'Why is it convincing?', a: 'The UPI ID or Caller ID looks nearly identical to legitimate ones.' },
                   { q: 'Why is it hard to verify?', a: 'Modern apps lack a "one-second" verification bridge during the interaction.' },
                   { q: 'Why does verification fail?', a: 'Cognitive load is too high during stressful scam situations.' },
-                  { q: 'Why ScamShield?', a: 'To automate the verification process and provide a visceral "Stop" warning.' },
+                  { q: 'Why Safex?', a: 'To automate the verification process and provide a visceral "Stop" warning.' },
                 ].map((item, i) => (
                   <div key={i} className="pl-10 relative">
                     <div className="absolute left-3 top-2 w-2 h-2 rounded-full bg-white/30 border border-white/50" />

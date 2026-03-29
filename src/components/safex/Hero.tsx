@@ -47,7 +47,7 @@ export default function Hero() {
         <div className="absolute inset-0 bg-[#00FF9D]/20 blur-3xl rounded-full" />
         <img 
           src="/hero_shield.png" 
-          alt="ScamShield Logo" 
+          alt="Safex Logo" 
           className="w-48 h-48 md:w-64 md:h-64 object-contain relative z-10 drop-shadow-[0_0_30px_rgba(0,255,157,0.3)]"
         />
       </motion.div>
