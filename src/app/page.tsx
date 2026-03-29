@@ -1,8 +1,8 @@
-import Header from '@/components/scamshield/Header';
-import RealTimeDashboard from '@/components/scamshield/RealTimeDashboard';
-import ProtectionSuite from '@/components/scamshield/ProtectionSuite';
-import ScamAwarenessModule from '@/components/scamshield/ScamAwarenessModule';
-import ImpactDashboard from '@/components/scamshield/ImpactDashboard';
+import Header from '@/components/safex/Header';
+import RealTimeDashboard from '@/components/safex/RealTimeDashboard';
+import ProtectionSuite from '@/components/safex/ProtectionSuite';
+import ScamAwarenessModule from '@/components/safex/ScamAwarenessModule';
+import ImpactDashboard from '@/components/safex/ImpactDashboard';
 
 export default function Home() {
   return (
