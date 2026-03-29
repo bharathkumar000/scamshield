@@ -147,6 +147,23 @@ export default function Scrollytelling({ onComplete }: { onComplete: () => void 
   const progressBar = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
   const scannerY = useTransform(scrollYProgress, [0.6, 0.8], ["-10%", "110%"]);
 
+  // Parallax effects for background
+  const bgY1 = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  const bgY2 = useTransform(scrollYProgress, [0, 1], ["0%", "-20%"]);
+
+  // Keyboard Navigation like PPT
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (['ArrowDown', 'ArrowRight', ' '].includes(e.key)) {
+        window.scrollBy({ top: window.innerHeight, behavior: 'smooth' });
+      } else if (['ArrowUp', 'ArrowLeft'].includes(e.key)) {
+        window.scrollBy({ top: -window.innerHeight, behavior: 'smooth' });
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   return (
     <div ref={containerRef} className="bg-[#030303] text-white selection:bg-[#00FF9D]/30 relative overflow-x-hidden font-sans">
       <CyberLogBackground />
@@ -171,8 +188,8 @@ export default function Scrollytelling({ onComplete }: { onComplete: () => void 
 
       {/* BACKGROUND ELEMENTS */}
       <div className="fixed inset-0 pointer-events-none -z-10">
-        <div className="absolute top-[10%] left-[-10%] w-[60%] h-[60%] bg-[#00FF9D]/5 blur-[200px] rounded-full animate-pulse" />
-        <div className="absolute bottom-[10%] right-[-10%] w-[60%] h-[60%] bg-blue-600/5 blur-[200px] rounded-full animate-pulse" />
+        <motion.div style={{ y: bgY1 }} className="absolute top-[10%] left-[-10%] w-[60%] h-[60%] bg-[#00FF9D]/5 blur-[200px] rounded-full animate-pulse" />
+        <motion.div style={{ y: bgY2 }} className="absolute bottom-[10%] right-[-10%] w-[60%] h-[60%] bg-blue-600/5 blur-[200px] rounded-full animate-pulse" />
         <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none" />
       </div>
 
@@ -201,43 +218,57 @@ export default function Scrollytelling({ onComplete }: { onComplete: () => void 
         </motion.div>
       </Section>
 
-      {/* SLIDE 1: VISION */}
+      {/* SLIDE 1: THE CRISIS (PROBLEM) */}
       <Section>
         <div className="max-w-6xl w-full px-12">
-           <TerminalFrame title="CORE_STRATEGY.LOG">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
+           <TerminalFrame title="SECURITY_THREAT_ASSESSMENT.LOG">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
                  <SlideIn direction="left">
                     <div className="space-y-12">
                        <div>
                           <div className="inline-flex items-center gap-3 px-6 py-2 bg-red-500/10 border border-red-500/20 rounded-md mb-8">
                              <AlertTriangle className="w-4 h-4 text-red-500" />
-                             <span className="text-[10px] font-mono font-black uppercase text-red-500 tracking-[0.3em]">01: THE_PROBLEM</span>
+                             <span className="text-[10px] font-mono font-black uppercase text-red-500 tracking-[0.3em]">CRITICAL_ALERT</span>
                           </div>
-                          <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tight leading-tight mb-8 text-white/90">{t('slide1_subtitle')}</h2>
-                          <p className="text-lg md:text-xl font-medium leading-relaxed font-mono text-red-500/60 italic border-l-2 border-red-500/20 pl-6">
-                             {t('slide1_problem')}
-                          </p>
+                          <h2 className="text-4xl md:text-7xl font-black uppercase tracking-tight leading-none mb-8 text-white">THE ₹1.2<span className="text-red-500">L</span> CR GASP</h2>
+                          <div className="space-y-6 font-mono border-l-2 border-red-500/20 pl-8">
+                             <p className="text-xl md:text-2xl font-bold text-red-500/80 italic leading-snug">
+                                {t('slide1_problem')}
+                             </p>
+                             <div className="flex flex-col gap-2 pt-4">
+                                <div className="text-[10px] text-white/40 uppercase tracking-widest">NATIONAL IMPACT :</div>
+                                <div className="text-3xl font-black text-white/90">₹1,20,000,000,000+ <span className="text-xs text-white/30 font-normal underline">PER ANNUM</span></div>
+                             </div>
+                          </div>
                        </div>
                     </div>
                  </SlideIn>
 
                  <SlideIn direction="right" delay={0.2}>
-                    <div className="space-y-12">
-                       <div>
-                          <div className="inline-flex items-center gap-3 px-6 py-2 bg-[#00FF9D]/10 border border-[#00FF9D]/20 rounded-md mb-8">
-                             <ShieldCheck className="w-4 h-4 text-[#00FF9D]" />
-                             <span className="text-[10px] font-mono font-black uppercase text-[#00FF9D] tracking-[0.3em]">02: THE_SHIELD</span>
-                          </div>
-                          <p className="text-xl md:text-2xl font-black leading-tight text-white/70 mb-10 uppercase tracking-tighter">
-                             {t('slide1_mission')}
-                          </p>
-                          <div className="space-y-4 pt-8 border-t border-white/5 font-mono">
-                             {[t('slide1_zerotrust'), t('slide1_humancentric')].map((text, i) => (
-                                <div key={i} className="flex items-center gap-4 text-[10px] font-black uppercase tracking-[0.2em] text-[#00FF9D]">
-                                   <ChevronRight className="w-4 h-4" /> {text}
+                    <div className="relative p-10 rounded-2xl bg-white/[0.02] border border-white/5 overflow-hidden group">
+                       <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                       <h3 className="text-xs font-black uppercase tracking-[0.4em] text-white/30 mb-10">&gt; HUMAN_VULNERABILITY_INDEX</h3>
+                       <div className="space-y-8">
+                          {[
+                             { label: 'SENSE OF URGENCY', val: '92%', color: 'bg-red-500' },
+                             { label: 'IDENTITY MIMICRY', val: '88%', color: 'bg-orange-500' },
+                             { label: 'KNOWLEDGE GAP', val: '74%', color: 'bg-yellow-500' }
+                          ].map((item, i) => (
+                             <div key={i} className="space-y-3">
+                                <div className="flex justify-between text-[10px] font-black uppercase tracking-widest text-white/60">
+                                   <span>{item.label}</span>
+                                   <span>{item.val}</span>
                                 </div>
-                             ))}
-                          </div>
+                                <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                                   <motion.div 
+                                      initial={{ width: 0 }}
+                                      whileInView={{ width: item.val }}
+                                      transition={{ duration: 1.5, delay: i * 0.2 }}
+                                      className={`h-full ${item.color}`}
+                                   />
+                                </div>
+                             </div>
+                          ))}
                        </div>
                     </div>
                  </SlideIn>
@@ -246,169 +277,214 @@ export default function Scrollytelling({ onComplete }: { onComplete: () => void 
         </div>
       </Section>
 
-      {/* SLIDE 2: ECOSYSTEM */}
+      {/* SLIDE 2: THE SOLUTION (SHIELD) */}
       <Section>
-        <div className="max-w-7xl w-full px-12">
+        <div className="max-w-7xl w-full px-12 text-center">
            <SlideIn direction="up">
-              <div className="text-center mb-16">
-                 <div className="inline-flex items-center gap-3 px-6 py-2 bg-blue-500/10 border border-blue-500/20 rounded-md mb-6">
-                    <Database className="w-4 h-4 text-blue-400" />
-                    <span className="text-[10px] font-mono font-black uppercase text-blue-400 tracking-[0.3em]">MODULE_REGISTRY</span>
-                 </div>
-                 <h2 className="text-4xl md:text-6xl font-sans font-black uppercase tracking-tight leading-none mb-8 text-center mx-auto">{t('slide2_subtitle')}</h2>
+              <div className="inline-flex items-center gap-4 px-8 py-3 bg-[#00FF9D]/5 border border-[#00FF9D]/20 rounded-full mb-12 backdrop-blur-3xl">
+                 <ShieldCheck className="w-5 h-5 text-[#00FF9D]" />
+                 <span className="text-xs font-mono font-black uppercase text-[#00FF9D] tracking-[0.4em]">1-SECOND WARNING SYSTEM</span>
               </div>
+              <h2 className="text-5xl md:text-8xl font-black uppercase tracking-tighter leading-none mb-10 mx-auto max-w-5xl">
+                 CORE_SHIELD <span className="text-[#00FF9D]">ECOSYSTEM</span>
+              </h2>
            </SlideIn>
 
-           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mt-16">
               {[
-                 { icon: <Globe />, title: 'GATEWAY_SCAN', desc: t('slide2_links_desc'), delay: 0 },
-                 { icon: <Smartphone />, title: 'SIGNAL_AUDIT', desc: t('slide2_sms_desc'), delay: 0.15 },
-                 { icon: <ShieldCheck />, title: 'UPI_HEURISTICS', desc: t('slide2_upi_desc'), delay: 0.3 }
+                 { icon: <Search />, title: 'LINK_SCAN', desc: 'Homograph Attack Detection', detail: 'O(L) Trie Matching' },
+                 { icon: <Smartphone />, title: 'SMS_AUDIT', desc: 'Urgency Sentiment AI', detail: 'Neural Text Analysis' },
+                 { icon: <Radar />, title: 'UPI_GUARD', desc: 'Lookalike ID Matching', detail: 'Linguistic Heuristics' },
+                 { icon: <Lock />, title: 'PRIVACY_X', desc: 'Zero-Data Architecture', detail: 'Local Edge Computing' }
               ].map((p, i) => (
-                 <SlideIn key={i} direction="up" delay={p.delay}>
-                    <TerminalFrame className="h-full group hover:border-[#00FF9D]/30 transition-all duration-700 hover:shadow-[0_0_50px_rgba(0,255,157,0.1)]" title={`UNIT_${i+1}.OBJ`}>
-                       <div className="w-16 h-16 rounded-lg bg-white/[0.03] flex items-center justify-center text-white mb-10 group-hover:scale-110 group-hover:text-[#00FF9D] transition-all">
+                 <SlideIn key={i} direction="up" delay={i * 0.1}>
+                    <div className="group relative p-8 rounded-2xl bg-black/40 border border-white/5 hover:border-[#00FF9D]/30 transition-all duration-500">
+                       <div className="w-14 h-14 rounded-xl bg-white/[0.03] flex items-center justify-center text-white/40 mb-8 mx-auto group-hover:bg-[#00FF9D]/10 group-hover:text-[#00FF9D] transition-all">
                           {p.icon}
                        </div>
-                       <h3 className="text-xl md:text-2xl font-mono font-black uppercase mb-4 tracking-tight group-hover:text-[#00FF9D] transition-colors">{p.title}</h3>
-                       <p className="text-base text-white/30 leading-relaxed font-mono font-medium group-hover:text-white/60 transition-colors uppercase italic">{p.desc}</p>
-                    </TerminalFrame>
+                       <h3 className="text-lg font-mono font-black uppercase mb-2 tracking-widest text-white/90">{p.title}</h3>
+                       <p className="text-[10px] font-mono uppercase text-white/30 mb-6 group-hover:text-white/60 transition-colors">{p.desc}</p>
+                       <div className="text-[9px] font-black uppercase tracking-widest text-[#00FF9D]/40 group-hover:text-[#00FF9D] transition-colors bg-[#00FF9D]/5 py-2 rounded-md">
+                          {p.detail}
+                       </div>
+                    </div>
                  </SlideIn>
               ))}
            </div>
         </div>
       </Section>
 
-      {/* SLIDE 3: ARCHITECTURE */}
-      <Section>
+      {/* SLIDE 3: DATA STRUCTURES & ALGORITHMS (TECH) */}
+      <Section className="bg-[#050505]">
         <div className="max-w-7xl w-full px-12">
-           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+           <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
               <div className="space-y-16">
                  <SlideIn direction="left">
                     <div className="inline-flex items-center gap-3 px-6 py-2 bg-purple-500/10 border border-purple-500/20 rounded-md mb-8">
-                       <Cpu className="w-4 h-4 text-purple-400" />
-                       <span className="text-[10px] font-mono font-black uppercase text-purple-400 tracking-[0.3em]">TECH_SPEC_V1.16</span>
+                       <Cpu className="w-5 h-5 text-purple-400" />
+                       <span className="text-[10px] font-mono font-black uppercase text-purple-400 tracking-[0.3em]">ALGORITHMIC_EXCELLENCE</span>
                     </div>
-                    <h2 className="text-4xl md:text-6xl font-sans font-black uppercase tracking-tighter leading-[0.9] mb-10">{t('slide3_subtitle')}</h2>
+                    <h2 className="text-4xl md:text-7xl font-sans font-black uppercase tracking-tighter leading-[0.9] mb-10">THE ARCHITECTURE OF <span className="text-purple-400">SAFETY</span></h2>
                  </SlideIn>
                  
-                 <div className="space-y-10">
-                    <SlideIn direction="left" delay={0.2}>
-                       <div className="p-8 rounded-xl bg-black/40 border border-[#00FF9D]/20 group font-mono shadow-xl">
-                          <h4 className="text-[10px] font-black uppercase tracking-[0.4em] text-[#00FF9D]/40 mb-6 italic">&gt; STACK_OVERVIEW</h4>
-                          <p className="text-lg md:text-2xl font-bold tracking-tight text-[#00FF9D] uppercase">{t('slide3_stack')}</p>
-                       </div>
-                    </SlideIn>
-                    <SlideIn direction="left" delay={0.4}>
-                       <div className="p-8 rounded-xl bg-white/[0.02] border border-white/5 group font-mono shadow-xl leading-relaxed">
-                          <h4 className="text-[10px] font-black uppercase tracking-[0.4em] text-white/20 mb-6 italic">&gt; PIPELINE_FLOW</h4>
-                          <p className="text-lg md:text-2xl font-black uppercase tracking-tighter italic text-white/40 group-hover:text-white/80 transition-all">{t('slide3_flow')}</p>
-                       </div>
-                    </SlideIn>
+                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {[
+                       { title: 'TRIES (PREFIX TREES)', desc: 'Ultra-fast O(L) domain blacklisting and prefix matching for millions of malicious URLs.' },
+                       { title: 'BLOOM FILTERS', desc: 'Space-efficient probabilistic data structures for instant safety verification.' },
+                       { title: 'DYNAMIC PROGRAMMING', desc: 'Levenshtein Distance algorithms to detect "lookalike" (Homograph) characters.' },
+                       { title: 'FINITE STATE MACHINES', desc: 'Powering the deterministic state flow of the SOS Panic Room & Educational tracks.' }
+                    ].map((tech, i) => (
+                       <SlideIn key={i} direction="left" delay={0.2 + (i * 0.1)}>
+                          <div className="p-6 rounded-xl bg-white/[0.02] border border-white/5 font-mono shadow-xl hover:border-purple-500/30 transition-colors">
+                             <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-purple-400 mb-3 italic">{tech.title}</h4>
+                             <p className="text-[11px] text-white/40 leading-relaxed uppercase">{tech.desc}</p>
+                          </div>
+                       </SlideIn>
+                    ))}
                  </div>
               </div>
 
               <SlideIn direction="right" delay={0.3}>
-                 <div className="relative h-[42rem] rounded-2xl border border-white/10 bg-black/90 shadow-2xl overflow-hidden flex flex-col p-12 group">
-                    <div className="flex items-center justify-between border-b border-white/5 pb-8 mb-10">
-                       <div className="flex gap-3">
-                          <div className="w-4 h-4 rounded-full bg-red-400/20" />
-                          <div className="w-4 h-4 rounded-full bg-yellow-400/20" />
-                          <div className="w-4 h-4 rounded-full bg-[#00FF9D] shadow-[0_0_15px_#00FF9D]" />
+                 <div className="relative rounded-2xl border border-white/10 bg-black/90 shadow-2xl overflow-hidden p-1 bg-[radial-gradient(circle_at_50%_50%,rgba(168,85,247,0.1),transparent)]">
+                    <TerminalFrame title="CORE_HEURISTICS_ENGINE" className="border-none">
+                       <div className="space-y-6 font-mono text-[11px] leading-relaxed">
+                          <div className="flex justify-between items-center text-purple-400/60 font-black">
+                             <span>STACK: NEXT.js 16 | REACT 19 | TS</span>
+                             <span>V1.16_RC</span>
+                          </div>
+                          <div className="p-6 bg-black/60 rounded-lg border border-white/5 space-y-4">
+                             <p className="text-white/40 flex gap-4"><span className="text-purple-500">01</span> &gt; INITIALIZING_TRIE_WALK...</p>
+                             <div className="pl-8 space-y-1">
+                                <p className="text-white/60">&gt; SEARCH( "urnzn.in" )</p>
+                                <p className="text-purple-400/80">&gt; DISTANCE: 0.88 (LEVENSHTEIN)</p>
+                                <p className="text-red-500 font-bold">&gt; MATCH FOUND: amazon.in</p>
+                             </div>
+                             <p className="text-white/40 flex gap-4"><span className="text-purple-500">02</span> &gt; PROBABILISTIC_CHECK: BLOOM_HIT</p>
+                             <p className="text-white/40 flex gap-4"><span className="text-purple-500">03</span> &gt; FSM_STATE: SOS_TRIGGER_READY</p>
+                             <div className="pt-6 border-t border-white/5 flex gap-1 justify-center">
+                                {[...Array(20)].map((_, i) => (
+                                   <motion.div 
+                                      key={i}
+                                      animate={{ height: [4, 20, 4] }}
+                                      transition={{ repeat: Infinity, duration: 1, delay: i * 0.05 }}
+                                      className="w-1 bg-purple-500/40 rounded-full"
+                                   />
+                                ))}
+                             </div>
+                          </div>
                        </div>
-                       <div className="flex items-center gap-4">
-                          <Eye className="w-5 h-5 text-[#00FF9D]/40" />
-                          <span className="text-[11px] font-mono text-[#00FF9D]/40 uppercase tracking-[0.4em] font-bold">RUNTIME_TELEMETRY</span>
-                       </div>
-                    </div>
-                    
-                    <div className="space-y-6 font-mono text-[11px] leading-relaxed flex-1 opacity-50 group-hover:opacity-100 transition-opacity">
-                       <p className="text-[#00FF9D] flex gap-4"><span className="opacity-20 text-white font-normal">SYS:</span> &gt; BOOTING_CORE.SAFEX_SHIELD</p>
-                       <p className="text-white/40 flex gap-4"><span className="opacity-20 text-white font-normal">API:</span> &gt; REQ_HANDLERS :: RESTORE_GATEWAY</p>
-                       <div className="pl-8 space-y-2 border-l border-[#00FF9D]/10 py-2 ml-2">
-                          <p>&gt; LINK_AUDIT: URLSCAN.IO_PING ... 124ms</p>
-                          <p>&gt; MALWARE_REP: VT_SYNC ... 88ms</p>
-                          <p>&gt; BLACKLIST: ABUSE_DB_CHECK ... 42ms</p>
-                       </div>
-                       <p className="text-yellow-500/80 flex gap-4"><span className="opacity-20 text-white font-normal">MAT:</span> &gt; HEURISTIC_MATCH :: SIG_VECTOR_4</p>
-                       <motion.p 
-                          animate={{ opacity: [0.4, 1, 0.4] }}
-                          transition={{ repeat: Infinity, duration: 1 }}
-                          className="text-red-500 font-bold flex gap-4"
-                       >
-                          <span className="opacity-20 text-white font-normal">RES:</span> &gt; ALERT_TRIGGER :: SCAM_PROB(0.9992)
-                       </motion.p>
-                       <p className="text-blue-400 flex gap-4"><span className="opacity-20 text-white font-normal">TXN:</span> &gt; PUSH_UI_DASHBOARD :: COMPLETE</p>
-                    </div>
-
-                    <motion.div 
-                       className="absolute inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-[#00FF9D] to-transparent shadow-[0_0_30px_#00FF9D] z-20 pointer-events-none"
-                       style={{ top: scannerY }}
-                    />
+                    </TerminalFrame>
                  </div>
               </SlideIn>
            </div>
         </div>
       </Section>
 
-      {/* SLIDE 4: EMPOWERMENT */}
+      {/* SLIDE 4: CASE STUDY - SOS PANIC ROOM */}
       <Section>
-        <div className="max-w-6xl w-full px-12 text-center space-y-20">
+        <div className="max-w-7xl w-full px-12">
+           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+              <SlideIn direction="left">
+                 <div className="relative aspect-video rounded-3xl border border-red-500/20 bg-black/60 overflow-hidden shadow-[0_0_100px_rgba(239,68,68,0.1)] group">
+                    <div className="absolute inset-x-0 h-full bg-gradient-to-t from-red-500/20 to-transparent pointer-events-none" />
+                    <div className="absolute inset-0 flex flex-col items-center justify-center p-12 text-center">
+                       <div className="w-24 h-24 rounded-full bg-red-500/10 border-4 border-red-500/20 flex items-center justify-center mb-8 relative">
+                          <motion.div 
+                             animate={{ scale: [1, 1.4, 1], opacity: [0.1, 0, 0.1] }}
+                             transition={{ repeat: Infinity, duration: 2 }}
+                             className="absolute inset-0 bg-red-500 rounded-full"
+                          />
+                          <AlertTriangle className="w-10 h-10 text-red-500 animate-pulse" />
+                       </div>
+                       <h3 className="text-4xl font-black uppercase tracking-tighter text-white mb-4">SOS PANIC ROOM</h3>
+                       <p className="text-xs font-mono font-black text-red-500 uppercase tracking-[0.5em] mb-10">URGENCY_ENGINE_ACTIVE</p>
+                       <div className="flex gap-4">
+                          <button className="px-6 py-2 bg-red-500 rounded font-mono text-[9px] font-black uppercase tracking-widest text-white">BLOCK_ALL</button>
+                          <button className="px-6 py-2 bg-white/10 rounded font-mono text-[9px] font-black uppercase tracking-widest text-white/40">GENERATE_DRAFT</button>
+                       </div>
+                    </div>
+                 </div>
+              </SlideIn>
+
+              <div className="space-y-16">
+                 <SlideIn direction="right">
+                    <div className="inline-flex items-center gap-3 px-6 py-2 bg-red-500/10 border border-red-500/20 rounded-md mb-8">
+                       <Activity className="w-5 h-5 text-red-500" />
+                       <span className="text-[10px] font-mono font-black uppercase text-red-500 tracking-[0.3em]">CASE_STUDY_REF:2026</span>
+                    </div>
+                    <h2 className="text-4xl md:text-6xl font-sans font-black uppercase tracking-tighter leading-none mb-10">THE GAP BETWEEN <span className="text-red-500 italic underline">SCAM & ACTION</span></h2>
+                    <p className="text-lg md:text-xl font-mono text-white/40 uppercase leading-relaxed italic border-l-2 border-red-500/20 pl-8">
+                       {t('dt_sos_rationale')}
+                    </p>
+                 </SlideIn>
+
+                 <div className="space-y-4">
+                    {[
+                       'Immediate Freeze: One-click scripts for UPI & Bank lockdown.',
+                       'Evidence Vault: Secure, local snapshot storage for forensics.',
+                       'Reporting Engine: 1930 Helpline integration & Automated legal drafts.',
+                       'Bilingual SOS: Kannada/English voice guidance for crisis moments.'
+                    ].map((step, i) => (
+                       <SlideIn key={i} direction="right" delay={0.2 + (i * 0.1)}>
+                          <div className="flex items-center gap-6 p-5 rounded-lg bg-white/[0.02] border border-white/5 hover:bg-white/[0.04] transition-colors group">
+                             <div className="text-[10px] font-black text-red-500/40 group-hover:text-red-500 transition-colors">0{i+1}</div>
+                             <div className="text-[9px] font-mono font-black uppercase tracking-[0.2em] text-white/60">{step}</div>
+                          </div>
+                       </SlideIn>
+                    ))}
+                 </div>
+              </div>
+           </div>
+        </div>
+      </Section>
+
+      {/* SLIDE 5: IMPACT & SDGs */}
+      <Section>
+        <div className="max-w-6xl w-full px-12 text-center space-y-24">
            <SlideIn direction="up">
               <div className="flex flex-col items-center">
-                 <div className="inline-flex items-center gap-3 px-6 py-2 bg-yellow-500/10 border border-yellow-500/20 rounded-md mb-8">
-                    <Brain className="w-5 h-5 text-yellow-500" />
-                    <span className="text-[10px] font-mono font-black uppercase text-yellow-500 tracking-[0.3em]">EDUCATIONAL_VECTORS</span>
+                 <div className="inline-flex items-center gap-4 px-8 py-3 bg-blue-500/10 border border-blue-500/20 rounded-full mb-10">
+                    <Globe className="w-5 h-5 text-blue-400" />
+                    <span className="text-xs font-mono font-black uppercase text-blue-400 tracking-[0.4em]">SOCIO_ECONOMIC_MANDATE</span>
                  </div>
-                 <h2 className="text-6xl md:text-8xl font-sans font-black uppercase tracking-tighter leading-none mb-4">NEURAL_DEPRESSION</h2>
-                 <p className="text-lg md:text-2xl font-mono uppercase tracking-[0.5em] text-[#00FF9D]/80 mb-10">THE HUMAN FIREWALL</p>
+                 <h2 className="text-6xl md:text-9xl font-black uppercase tracking-tighter leading-tight">IMPACT <span className="text-blue-400 italic">2026</span></h2>
               </div>
            </SlideIn>
 
            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
               <SlideIn direction="left" delay={0.2}>
-                 <TerminalFrame title="TRAINING_UNIT_X.BIN" className="h-full flex flex-col group">
-                    <h4 className="text-2xl font-mono font-black uppercase tracking-tight text-[#00FF9D] mb-6">{t('slide4_module').split(':')[0]}</h4>
-                    <p className="text-base font-mono text-white/30 leading-relaxed font-medium mb-12 flex-1 italic group-hover:text-white/60 transition-colors">{t('slide4_module').split(':')[1]}</p>
-                    <div className="flex gap-4">
-                       <span className="px-4 py-2 bg-[#00FF9D]/10 rounded-md text-[9px] font-mono font-black uppercase text-[#00FF9D] tracking-widest border border-[#00FF9D]/20">{t('slide4_modes').split('•')[0]}</span>
-                       <span className="px-4 py-2 bg-white/5 rounded-md text-[9px] font-mono font-black uppercase text-white/30 tracking-widest border border-white/5">{t('slide4_modes').split('•')[1]}</span>
+                 <div className="p-12 rounded-3xl bg-blue-600/5 border border-blue-500/10 text-left space-y-8 group hover:border-blue-500/40 transition-all">
+                    <h4 className="text-2xl font-mono font-black uppercase text-blue-400">&gt; SDG_03: WELLNESS</h4>
+                    <p className="text-lg font-mono text-white/50 leading-relaxed uppercase italic">Reducing financial stress and mental trauma. Securing the mental health of our digital middle class.</p>
+                    <div className="w-full h-1 bg-blue-500/20 rounded-full overflow-hidden">
+                       <motion.div animate={{ x: ['-100%', '100%'] }} transition={{ repeat: Infinity, duration: 3 }} className="w-1/3 h-full bg-blue-400 shadow-[0_0_20px_#60A5FA]" />
                     </div>
-                 </TerminalFrame>
+                 </div>
               </SlideIn>
               <SlideIn direction="right" delay={0.4}>
-                 <TerminalFrame title="ROADMAP_LOG.TXT" className="h-full flex flex-col group border-dashed border-blue-500/30">
-                    <h4 className="text-2xl font-mono font-black uppercase tracking-tight text-blue-400 mb-6">{t('slide4_regional').split(':')[0]}</h4>
-                    <p className="text-base font-mono text-white/30 leading-relaxed font-medium mb-12 flex-1 italic group-hover:text-white/60 transition-colors italic">{t('slide4_regional').split(':')[1]}</p>
-                    <div className="p-5 rounded-lg bg-blue-500/5 border border-blue-500/10 font-mono">
-                       <h5 className="text-[9px] font-black uppercase text-blue-400 tracking-widest mb-3"># UPCOMING_ALPHAS</h5>
-                       <p className="text-[10px] uppercase tracking-widest text-white/30">{t('slide4_roadmap')}</p>
+                 <div className="p-12 rounded-3xl bg-[#00FF9D]/5 border border-[#00FF9D]/10 text-left space-y-8 group hover:border-[#00FF9D]/40 transition-all">
+                    <h4 className="text-2xl font-mono font-black uppercase text-[#00FF9D]">&gt; SDG_04: EDUCATION</h4>
+                    <p className="text-lg font-mono text-white/50 leading-relaxed uppercase italic">Gamified certification. Building a "Scam-Proof" citizenry through active peer-to-peer training.</p>
+                    <div className="w-full h-1 bg-[#00FF9D]/20 rounded-full overflow-hidden">
+                       <motion.div animate={{ x: ['-100%', '100%'] }} transition={{ repeat: Infinity, duration: 3, delay: 1 }} className="w-1/3 h-full bg-[#00FF9D] shadow-[0_0_20px_#00FF9D]" />
                     </div>
-                 </TerminalFrame>
+                 </div>
               </SlideIn>
            </div>
 
            <SlideIn direction="up" delay={0.6}>
-              <div className="pt-16 flex flex-col items-center">
+              <div className="pt-20 flex flex-col items-center">
                  <Button 
                    onClick={onComplete}
-                   className="h-20 px-12 md:px-24 rounded-lg bg-[#00FF9D] hover:bg-white text-black font-mono font-black uppercase tracking-[0.4em] text-xl md:text-2xl transition-all shadow-[0_20px_40px_rgba(0,255,157,0.3)] hover:scale-105 active:scale-95 group relative overflow-hidden"
+                   className="h-24 px-16 md:px-32 rounded-xl bg-[#00FF9D] hover:bg-white text-black font-mono font-black uppercase tracking-[0.5em] text-2xl md:text-3xl transition-all shadow-[0_20px_80px_rgba(0,255,157,0.4)] hover:scale-105 active:scale-95 group relative overflow-hidden"
                  >
-                   <div className="absolute inset-x-0 h-full bg-white/20 -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
-                   &gt; LAUNCH_DASHBOARD
+                   LAUNCH_COMMAND_CENTER
                  </Button>
-                 
-                 <div className="mt-20 opacity-30 flex flex-col items-center gap-8 font-mono">
-                    <div className="w-px h-16 bg-[#00FF9D]/40" />
-                    <div className="text-center">
-                       <p className="text-[10px] font-black uppercase tracking-[1em] text-[#00FF9D]">{t('nexus')}</p>
-                       <p className="text-[8px] font-black uppercase tracking-[0.2em] text-white/50 mt-4 leading-loose">ENCRYPTED // SECURE // BILINGUAL</p>
-                    </div>
-                 </div>
               </div>
            </SlideIn>
         </div>
       </Section>
+
     </div>
   );
 }
