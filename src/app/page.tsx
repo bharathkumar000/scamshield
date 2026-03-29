@@ -74,9 +74,9 @@ export default function Home() {
             <span>VVCE Mysuru</span>
           </div>
           <p className="text-white/60 text-sm md:text-base font-medium leading-relaxed">
-            Designed for <span className="text-white font-bold italic">"Clash of Cortex"</span> 2026 submission.
+            Protecting digital citizens with zero-trust heuristics.
             <br />
-            Developed by <span className="text-[#00FF9D] font-black uppercase tracking-tight">Team Nexus 1</span> from Vidyavardhaka College of Engineering.
+            Developed by <span className="text-[#00FF9D] font-black uppercase tracking-tight">TECH NEXUS</span> | VVCE Mysuru
           </p>
         </div>
       </footer>
