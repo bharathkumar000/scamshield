@@ -26,7 +26,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
-const SlideIn = ({ children, direction = 'right', delay = 0 }: { children: React.ReactNode, direction?: 'left' | 'right' | 'up' | 'down', delay?: number }) => {
+const SlideIn = ({ children, direction = 'right', delay = 0, className = "" }: { children: React.ReactNode, direction?: 'left' | 'right' | 'up' | 'down', delay?: number, className?: string }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: false, amount: 0.1 });
   
@@ -58,7 +58,7 @@ const SlideIn = ({ children, direction = 'right', delay = 0 }: { children: React
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
       variants={variants}
-      className="w-full"
+      className={`w-full ${className}`}
     >
       {children}
     </motion.div>
@@ -487,7 +487,7 @@ export default function Scrollytelling({ onComplete }: { onComplete: () => void 
               </div>
            </SlideIn>
 
-           <div className="flex flex-wrap justify-center gap-8 text-left">
+           <div className="grid grid-cols-1 md:grid-cols-6 gap-8 max-w-6xl mx-auto">
               {[
                  { 
                    sdg: 'SDG_03: WELLNESS', 
@@ -520,8 +520,8 @@ export default function Scrollytelling({ onComplete }: { onComplete: () => void 
                    color: 'red' 
                  }
               ].map((item, i) => (
-                 <SlideIn key={i} direction="up" delay={0.3 + (i * 0.1)}>
-                    <div className={`p-8 rounded-2xl bg-${item.color}-600/5 border border-white/5 space-y-6 hover:bg-white/[0.03] transition-all group relative overflow-hidden h-full max-w-sm`}>
+                 <SlideIn key={i} direction="up" delay={0.3 + (i * 0.1)} className={`md:col-span-2 ${i === 3 ? 'md:col-start-2' : ''}`}>
+                    <div className={`p-8 rounded-2xl bg-${item.color}-600/5 border border-white/5 space-y-6 hover:bg-white/[0.03] transition-all group relative overflow-hidden h-full w-full`}>
                        {/* White Corner Borders */}
                        <div className="absolute top-0 left-0 w-8 h-8 border-l border-t border-white opacity-40" />
                        <div className="absolute top-0 right-0 w-8 h-8 border-r border-t border-white opacity-40" />

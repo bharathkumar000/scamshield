@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Header from '@/components/safex/Header';
 import RealTimeDashboard from '@/components/safex/RealTimeDashboard';
 import ProtectionSuite from '@/components/safex/ProtectionSuite';
@@ -15,6 +15,12 @@ export default function Home() {
   const { t } = useLanguage();
   const [showStory, setShowStory] = useState(true);
   const [isSOSOpen, setIsSOSOpen] = useState(false);
+
+  useEffect(() => {
+    if (!showStory) {
+      window.scrollTo(0, 0);
+    }
+  }, [showStory]);
 
   return (
     <main className="min-h-screen relative overflow-x-hidden selection:bg-[#00FF9D]/30 selection:text-white flex flex-col">
