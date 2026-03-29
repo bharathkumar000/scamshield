@@ -186,31 +186,6 @@ export default function Scrollytelling({ onComplete }: { onComplete: () => void 
         />
       </div>
 
-      {/* Floating Nano Navigation */}
-      <motion.div 
-        initial={{ y: 50, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        className="fixed bottom-12 left-1/2 -translate-x-1/2 z-[100] flex items-center gap-2 p-2 bg-black/80 border border-white/5 backdrop-blur-3xl rounded-2xl shadow-2xl"
-      >
-        {[
-          { label: 'Protect', ref: protectRef, icon: <Shield className="w-4 h-4" /> },
-          { label: 'Features', ref: featuresRef, icon: <Zap className="w-4 h-4" /> },
-          { label: 'Training', ref: trainingRef, icon: <Brain className="w-4 h-4" /> },
-          { label: 'Impact', ref: impactRef, icon: <Globe className="w-4 h-4" /> }
-        ].map((item) => (
-          <button
-            key={item.label}
-            onClick={() => scrollTo(item.ref)}
-            className="flex items-center gap-3 px-6 py-3 rounded-xl hover:bg-white/5 transition-all group font-mono text-[11px] font-black uppercase tracking-widest text-white/40 hover:text-[#00FF9D]"
-          >
-            <span className="opacity-0 group-hover:opacity-100 transition-opacity text-[#00FF9D]">
-              {item.icon}
-            </span>
-            {item.label}
-          </button>
-        ))}
-      </motion.div>
-
       {/* Persistent Badge */}
       <motion.div 
         initial={{ y: -50, opacity: 0 }}
@@ -244,7 +219,7 @@ export default function Scrollytelling({ onComplete }: { onComplete: () => void 
                className="absolute inset-x-0 h-1 bg-[#00FF9D] blur-md bottom-0"
             />
           </div>
-          <h1 className="text-8xl md:text-[8rem] font-sans font-black uppercase tracking-tighter leading-none mb-4 text-gradient">
+          <h1 className="text-6xl md:text-8xl font-sans font-black uppercase tracking-tighter leading-none mb-4 text-gradient">
             Safe<span className="text-white">x</span>
           </h1>
           <p className="text-xl md:text-2xl font-mono uppercase tracking-[1em] text-white/20 italic">
@@ -265,14 +240,14 @@ export default function Scrollytelling({ onComplete }: { onComplete: () => void 
                              <AlertTriangle className="w-4 h-4 text-red-500" />
                              <span className="text-[10px] font-mono font-black uppercase text-red-500 tracking-[0.3em]">CRITICAL_ALERT</span>
                           </div>
-                          <h2 className="text-4xl md:text-7xl font-black uppercase tracking-tight leading-none mb-8 text-white">THE ₹1.2<span className="text-red-500">L</span> CR GASP</h2>
+                          <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tight leading-none mb-4 text-white">THE ₹1.2<span className="text-red-500">L</span> CR GASP</h2>
                           <div className="space-y-6 font-mono border-l-2 border-red-500/20 pl-8">
                              <p className="text-xl md:text-2xl font-bold text-red-500/80 italic leading-snug">
                                 {t('slide1_problem')}
                              </p>
                              <div className="flex flex-col gap-2 pt-4">
                                 <div className="text-[10px] text-white/40 uppercase tracking-widest">NATIONAL IMPACT :</div>
-                                <div className="text-3xl font-black text-white/90">₹1,20,000,000,000+ <span className="text-xs text-white/30 font-normal underline">PER ANNUM</span></div>
+                                <div className="text-2xl font-black text-white/90">₹1,20,000,000,000+ <span className="text-[10px] text-white/30 font-normal underline">PER ANNUM</span></div>
                              </div>
                           </div>
                        </div>
@@ -320,17 +295,17 @@ export default function Scrollytelling({ onComplete }: { onComplete: () => void 
                  <ShieldCheck className="w-5 h-5 text-[#00FF9D]" />
                  <span className="text-xs font-mono font-black uppercase text-[#00FF9D] tracking-[0.4em]">1-SECOND WARNING SYSTEM</span>
               </div>
-              <h2 className="text-5xl md:text-8xl font-black uppercase tracking-tighter leading-none mb-10 mx-auto max-w-5xl">
+              <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-none mb-10 mx-auto max-w-4xl">
                  CORE_SHIELD <span className="text-[#00FF9D]">ECOSYSTEM</span>
               </h2>
            </SlideIn>
 
            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mt-16">
               {[
-                 { icon: <Search />, title: 'LINK_SCAN', desc: 'Homograph Attack Detection', detail: 'O(L) Trie Matching' },
-                 { icon: <Smartphone />, title: 'SMS_AUDIT', desc: 'Urgency Sentiment AI', detail: 'Neural Text Analysis' },
-                 { icon: <Radar />, title: 'UPI_GUARD', desc: 'Lookalike ID Matching', detail: 'Linguistic Heuristics' },
-                 { icon: <Lock />, title: 'PRIVACY_X', desc: 'Zero-Data Architecture', detail: 'Local Edge Computing' }
+                 { icon: <Search className="w-5 h-5" />, title: 'LINK_SCAN', desc: 'Homograph Attack Detection', detail: 'O(L) Trie Matching' },
+                 { icon: <Smartphone className="w-5 h-5" />, title: 'SMS_AUDIT', desc: 'Urgency Sentiment AI', detail: 'Neural Text Analysis' },
+                 { icon: <Radar className="w-5 h-5" />, title: 'UPI_GUARD', desc: 'Lookalike ID Matching', detail: 'Linguistic Heuristics' },
+                 { icon: <Lock className="w-5 h-5" />, title: 'PRIVACY_X', desc: 'Zero-Data Architecture', detail: 'Local Edge Computing' }
               ].map((p, i) => (
                  <SlideIn key={i} direction="up" delay={i * 0.1}>
                     <div className="group relative p-8 rounded-2xl bg-black/40 border border-white/5 hover:border-[#00FF9D]/30 transition-all duration-500">
@@ -359,7 +334,7 @@ export default function Scrollytelling({ onComplete }: { onComplete: () => void 
                        <Cpu className="w-5 h-5 text-purple-400" />
                        <span className="text-[10px] font-mono font-black uppercase text-purple-400 tracking-[0.3em]">ALGORITHMIC_EXCELLENCE</span>
                     </div>
-                    <h2 className="text-4xl md:text-7xl font-sans font-black uppercase tracking-tighter leading-[0.9] mb-10">THE ARCHITECTURE OF <span className="text-purple-400">SAFETY</span></h2>
+                    <h2 className="text-3xl md:text-5xl font-sans font-black uppercase tracking-tighter leading-[0.9] mb-10">THE ARCHITECTURE OF <span className="text-purple-400">SAFETY</span></h2>
                  </SlideIn>
                  
                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -427,7 +402,7 @@ export default function Scrollytelling({ onComplete }: { onComplete: () => void 
                           <Activity className="w-5 h-5 text-red-500" />
                           <span className="text-[10px] font-mono font-black uppercase text-red-500 tracking-[0.3em]">CASE_STUDY_REF:2026</span>
                        </div>
-                       <h2 className="text-4xl md:text-7xl font-sans font-black uppercase tracking-tighter leading-none mb-10 text-white">
+                       <h2 className="text-3xl md:text-5xl font-sans font-black uppercase tracking-tighter leading-none mb-8 text-white">
                           THE GAP BETWEEN 
                           <span className="block text-red-500 italic underline decoration-white/20">SCAM & ACTION</span>
                        </h2>
@@ -490,7 +465,7 @@ export default function Scrollytelling({ onComplete }: { onComplete: () => void 
                     <Globe className="w-5 h-5 text-blue-400" />
                     <span className="text-xs font-mono font-black uppercase text-blue-400 tracking-[0.4em]">SOCIO_ECONOMIC_MANDATE</span>
                  </div>
-                 <h2 className="text-6xl md:text-9xl font-black uppercase tracking-tighter leading-tight">IMPACT <span className="text-blue-400 italic">ROI</span></h2>
+                 <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-tight">IMPACT <span className="text-blue-400 italic">ROI</span></h2>
               </div>
            </SlideIn>
 
@@ -501,9 +476,9 @@ export default function Scrollytelling({ onComplete }: { onComplete: () => void 
                     <Zap className="w-20 h-20 text-[#00FF9D]" />
                  </div>
                  <div className="space-y-4">
-                    <h3 className="text-4xl md:text-5xl font-black uppercase tracking-tight text-white group-hover:text-[#00FF9D] transition-colors">THE SAVINGS MULTIPLIER</h3>
-                    <div className="flex flex-col md:flex-row gap-12 items-baseline">
-                       <div className="text-6xl md:text-8xl font-black text-[#00FF9D] font-mono">₹1.2<span className="text-3xl text-white/40">L</span> CR</div>
+                    <h3 className="text-3xl md:text-4xl font-black uppercase tracking-tight text-white group-hover:text-[#00FF9D] transition-colors">THE SAVINGS MULTIPLIER</h3>
+                    <div className="flex flex-col md:flex-row gap-8 items-baseline">
+                       <div className="text-5xl md:text-7xl font-black text-[#00FF9D] font-mono">₹1.2<span className="text-2xl text-white/40">L</span> CR</div>
                        <p className="text-lg md:text-xl font-mono text-white/40 uppercase tracking-widest max-w-sm">
                           POTENTIAL ANNUAL WEALTH PROTECTION BY NEUTRALIZING HOMOGRAPH & UPI VECTORS.
                        </p>

@@ -15,30 +15,34 @@ export default function ImpactDashboard() {
   ];
 
   return (
-    <section className="py-24 px-6 max-w-6xl mx-auto mb-20">
+    <section className="py-16 px-6 max-w-6xl mx-auto mb-10">
       <div className="flex flex-col md:flex-row gap-12 items-center">
         <div className="md:w-1/2">
-          <h3 className="text-5xl font-black mb-8 tracking-tight uppercase text-gradient">
+          <h3 className="text-3xl md:text-4xl font-black mb-6 tracking-tight uppercase text-gradient">
             {t('impact')}
           </h3>
-          <p className="text-white/60 text-lg mb-12 leading-relaxed max-w-lg font-medium">
+          <p className="text-white/60 text-base mb-8 leading-relaxed max-w-md font-medium">
             Safex is more than a tool—it's a mission to protect the socio-economic well-being of Indian families. 
             By preventing just one scam, we protect a student's fee, a family's savings, and their peace of mind.
           </p>
 
-          <div className="flex gap-16">
-            <div className="flex flex-col items-center gap-4">
-              <div className="w-20 h-20 rounded-3xl bg-[#00FF9D]/10 flex items-center justify-center border border-[#00FF9D]/30 group hover:bg-[#00FF9D] transition-all">
-                <HeartPulse className="w-10 h-10 text-[#00FF9D] group-hover:text-black transition-all" />
+          <div className="flex flex-wrap gap-10">
+            {[
+              { label: 'SDG 3: Wellness', icon: <HeartPulse className="w-10 h-10" /> },
+              { label: 'SDG 4: Education', icon: <GraduationCap className="w-10 h-10" /> },
+              { label: 'SDG 8: Growth', icon: <TrendingUp className="w-10 h-10" /> },
+              { label: 'SDG 9: Innovation', icon: <Target className="w-10 h-10" /> },
+              { label: 'SDG 16: Justice', icon: <Users className="w-10 h-10" /> }
+            ].map((sdg, i) => (
+              <div key={i} className="flex flex-col items-center gap-4 group">
+                <div className="w-16 h-16 rounded-2xl bg-[#00FF9D]/10 flex items-center justify-center border border-[#00FF9D]/30 group-hover:bg-[#00FF9D] transition-all">
+                  <div className="text-[#00FF9D] group-hover:text-black transition-all">
+                    {sdg.icon}
+                  </div>
+                </div>
+                <span className="text-[9px] uppercase font-black tracking-widest text-white/40 group-hover:text-[#00FF9D] transition-colors">{sdg.label}</span>
               </div>
-              <span className="text-xs uppercase font-bold tracking-[0.2em] text-white/50">SDG 3: Well-being</span>
-            </div>
-            <div className="flex flex-col items-center gap-4">
-              <div className="w-20 h-20 rounded-3xl bg-[#00FF9D]/10 flex items-center justify-center border border-[#00FF9D]/30 group hover:bg-[#00FF9D] transition-all">
-                <GraduationCap className="w-10 h-10 text-[#00FF9D] group-hover:text-black transition-all" />
-              </div>
-              <span className="text-xs uppercase font-bold tracking-[0.2em] text-white/50">SDG 4: Education</span>
-            </div>
+            ))}
           </div>
         </div>
 

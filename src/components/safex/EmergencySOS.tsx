@@ -23,6 +23,17 @@ import { useState } from 'react';
 export default function EmergencySOS({ isOpen, onClose }: { isOpen: boolean, onClose: () => void }) {
   const { t, language } = useLanguage();
   const [step, setStep] = useState(1);
+  const [actionsCompleted, setActionsCompleted] = useState<{ [key: string]: boolean }>({});
+  const [uploadState, setUploadState] = useState<'idle' | 'uploading' | 'complete'>('idle');
+
+  const toggleAction = (id: string) => {
+    setActionsCompleted(prev => ({ ...prev, [id]: !prev[id] }));
+  };
+
+  const simulateUpload = () => {
+    setUploadState('uploading');
+    setTimeout(() => setUploadState('complete'), 2000);
+  };
 
   const steps = [
     { id: 1, title: t('sos_step1'), icon: <Octagon className="w-6 h-6" /> },
@@ -52,8 +63,8 @@ export default function EmergencySOS({ isOpen, onClose }: { isOpen: boolean, onC
                 <ShieldAlert className="text-white w-7 h-7" />
               </div>
               <div>
-                <h1 className="text-2xl font-black text-[#FF3B3B] tracking-tighter uppercase leading-none">{t('sos_title')}</h1>
-                <p className="text-[10px] font-bold text-white/40 tracking-[0.3em] uppercase mt-1">{t('sos_subtitle')}</p>
+                <h1 className="text-xl font-black text-[#FF3B3B] tracking-tighter uppercase leading-none">{t('sos_title')}</h1>
+                <p className="text-[9px] font-bold text-white/40 tracking-[0.3em] uppercase mt-1">{t('sos_subtitle')}</p>
               </div>
             </div>
             <button 
@@ -71,7 +82,7 @@ export default function EmergencySOS({ isOpen, onClose }: { isOpen: boolean, onC
                 <div 
                   key={s.id}
                   onClick={() => setStep(s.id)}
-                  className={`flex-1 min-w-[140px] p-4 rounded-2xl border transition-all cursor-pointer ${
+                  className={`flex-1 min-w-[120px] p-3 rounded-xl border transition-all cursor-pointer ${
                     step === s.id 
                     ? 'bg-[#FF3B3B] border-[#FF3B3B] text-white shadow-[0_10px_30px_rgba(255,59,59,0.2)]' 
                     : step > s.id 
@@ -92,7 +103,7 @@ export default function EmergencySOS({ isOpen, onClose }: { isOpen: boolean, onC
             </div>
 
             {/* Step Content */}
-            <div className="bg-white/[0.02] border border-white/10 rounded-[3rem] p-8 md:p-16 min-h-[500px] relative overflow-hidden">
+            <div className="bg-white/[0.02] border border-white/10 rounded-[2rem] p-6 md:p-10 min-h-[400px] relative overflow-hidden">
               <AnimatePresence mode="wait">
                 {step === 1 && (
                   <motion.div 
@@ -103,41 +114,97 @@ export default function EmergencySOS({ isOpen, onClose }: { isOpen: boolean, onC
                     className="space-y-12"
                   >
                     <div className="max-w-2xl">
-                    <h2 className="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter mb-4 leading-none">
+                    <h2 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tighter mb-4 leading-none">
                       {t('sos_step1')}
                     </h2>
-                    <p className="text-xl text-white/40 font-medium italic">{t('sos_step1_desc')}</p>
+                    <p className="text-lg text-white/40 font-medium italic">{t('sos_step1_desc')}</p>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                      <Button className="h-40 rounded-[2.5rem] bg-[#FF3B3B] hover:bg-[#FF3B3B]/90 text-white flex flex-col gap-4 group">
-                        <Phone className="w-10 h-10 group-hover:rotate-12 transition-transform" />
-                        <div className="text-center">
-                          <span className="block text-2xl font-black">1930</span>
-                          <span className="text-[10px] uppercase font-black tracking-widest opacity-60">{t('sos_call_1930')}</span>
-                        </div>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                      <Button 
+                        onClick={() => toggleAction('1930')}
+                        className={`h-32 rounded-2xl transition-all duration-500 flex flex-col gap-2 group relative overflow-hidden ${
+                          actionsCompleted['1930'] 
+                          ? 'bg-green-600 hover:bg-green-700 shadow-[0_0_40px_rgba(34,197,94,0.4)]' 
+                          : 'bg-[#FF3B3B] hover:bg-[#FF3B3B]/90 shadow-[0_0_20px_rgba(255,59,59,0.3)]'
+                        }`}
+                      >
+                        <AnimatePresence mode="wait">
+                          {actionsCompleted['1930'] ? (
+                            <motion.div key="check" initial={{ scale: 0 }} animate={{ scale: 1 }} className="flex flex-col items-center gap-2">
+                              <ShieldCheck className="w-10 h-10 text-white" />
+                              <span className="text-[10px] uppercase font-black tracking-widest text-white/80">Dialed Successfully</span>
+                            </motion.div>
+                          ) : (
+                            <motion.div key="phone" initial={{ scale: 0.8 }} animate={{ scale: 1 }} className="flex flex-col items-center gap-2">
+                              <Phone className="w-8 h-8 group-hover:rotate-12 transition-transform" />
+                              <div className="text-center">
+                                <span className="block text-xl font-black">1930</span>
+                                <span className="text-[9px] uppercase font-black tracking-widest opacity-60">{t('sos_call_1930')}</span>
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
                       </Button>
-                      <Button className="h-40 rounded-[2.5rem] bg-white/5 border border-white/10 hover:bg-white/10 text-white flex flex-col gap-4 group">
-                        <Smartphone className="w-10 h-10 group-hover:scale-110 transition-transform text-[#FF3B3B]" />
-                        <div className="text-center">
-                          <span className="block text-xl font-black uppercase leading-none mb-1">UPI BLOCK</span>
-                          <span className="text-[10px] uppercase font-black tracking-widest opacity-40">{t('sos_block_upi')}</span>
-                        </div>
+
+                      <Button 
+                        onClick={() => toggleAction('upi')}
+                        className={`h-32 rounded-2xl transition-all duration-500 border flex flex-col gap-2 group ${
+                          actionsCompleted['upi']
+                          ? 'bg-green-600/10 border-green-500 text-green-500'
+                          : 'bg-white/5 border-white/10 hover:bg-white/10 text-white'
+                        }`}
+                      >
+                        <AnimatePresence mode="wait">
+                          {actionsCompleted['upi'] ? (
+                            <motion.div key="check" initial={{ scale: 0 }} animate={{ scale: 1 }} className="flex flex-col items-center gap-2">
+                              <ShieldCheck className="w-8 h-8" />
+                              <span className="text-[9px] uppercase font-black tracking-widest">UPI LOCK ACTIVE</span>
+                            </motion.div>
+                          ) : (
+                            <div className="flex flex-col items-center gap-2">
+                               <Smartphone className="w-8 h-8 group-hover:scale-110 transition-transform text-[#FF3B3B]" />
+                               <div className="text-center">
+                                 <span className="block text-lg font-black uppercase leading-none mb-1">UPI BLOCK</span>
+                                 <span className="text-[9px] uppercase font-black tracking-widest opacity-40">{t('sos_block_upi')}</span>
+                               </div>
+                            </div>
+                          )}
+                        </AnimatePresence>
                       </Button>
-                      <Button className="h-40 rounded-[2.5rem] bg-white/5 border border-white/10 hover:bg-white/10 text-white flex flex-col gap-4 group">
-                        <Banknote className="w-10 h-10 group-hover:scale-110 transition-transform text-[#FF3B3B]" />
-                        <div className="text-center">
-                          <span className="block text-xl font-black uppercase leading-none mb-1">BANK FREEZE</span>
-                          <span className="text-[10px] uppercase font-black tracking-widest opacity-40">{t('sos_freeze_bank')}</span>
-                        </div>
+
+                      <Button 
+                        onClick={() => toggleAction('bank')}
+                        className={`h-32 rounded-2xl transition-all duration-500 border flex flex-col gap-2 group ${
+                          actionsCompleted['bank']
+                          ? 'bg-green-600/10 border-green-500 text-green-500'
+                          : 'bg-white/5 border-white/10 hover:bg-white/10 text-white'
+                        }`}
+                      >
+                       <AnimatePresence mode="wait">
+                          {actionsCompleted['bank'] ? (
+                            <motion.div key="check" initial={{ scale: 0 }} animate={{ scale: 1 }} className="flex flex-col items-center gap-2">
+                              <ShieldCheck className="w-8 h-8" />
+                              <span className="text-[9px] uppercase font-black tracking-widest">BANK FREEZE INITIATED</span>
+                            </motion.div>
+                          ) : (
+                             <div className="flex flex-col items-center gap-2">
+                               <Banknote className="w-8 h-8 group-hover:scale-110 transition-transform text-[#FF3B3B]" />
+                               <div className="text-center">
+                                 <span className="block text-lg font-black uppercase leading-none mb-1">BANK FREEZE</span>
+                                 <span className="text-[9px] uppercase font-black tracking-widest opacity-40">{t('sos_freeze_bank')}</span>
+                               </div>
+                             </div>
+                          )}
+                        </AnimatePresence>
                       </Button>
                     </div>
 
-                    <div className="p-8 rounded-[2rem] bg-amber-500/5 border border-amber-500/20 flex gap-6 items-start">
-                      <AlertCircle className="w-8 h-8 text-amber-500 shrink-0 mt-1" />
+                    <div className="p-6 rounded-2xl bg-amber-500/5 border border-amber-500/20 flex gap-6 items-start">
+                      <AlertCircle className="w-6 h-6 text-amber-500 shrink-0 mt-1" />
                       <div>
-                        <h4 className="text-amber-500 font-black uppercase tracking-widest text-sm mb-2">Did you know?</h4>
-                        <p className="text-amber-500/60 text-sm font-medium leading-relaxed leading-tight uppercase italic font-bold">
+                        <h4 className="text-amber-500 font-black uppercase tracking-widest text-[10px] mb-2">Did you know?</h4>
+                        <p className="text-amber-500/60 text-xs font-medium leading-relaxed uppercase italic font-bold">
                           The "Golden Hour" is the first 2 hours of a cyber transaction. Calling 1930 immediately gives local police the power to freeze the money in the scammer's bank account before they withdraw it.
                         </p>
                       </div>
@@ -160,24 +227,32 @@ export default function EmergencySOS({ isOpen, onClose }: { isOpen: boolean, onC
 
                     <div className="space-y-4">
                       {[
-                        { title: t('sos_lock_logout'), sub: 'Force logout all active sessions across Google, Meta, and Banking apps.', icon: <X /> },
-                        { title: t('sos_lock_reset'), sub: 'Change passwords for email, LinkedIn, and banking apps immediately.', icon: <Lock /> },
-                        { title: t('sos_lock_2fa'), sub: 'Use Authenticator apps instead of SMS-based OTP if possible.', icon: <ShieldCheck /> }
+                        { id: 'logout', title: t('sos_lock_logout'), sub: 'Force logout all active sessions across Google, Meta, and Banking apps.', icon: <X /> },
+                        { id: 'reset', title: t('sos_lock_reset'), sub: 'Change passwords for email, LinkedIn, and banking apps immediately.', icon: <Lock /> },
+                        { id: '2fa', title: t('sos_lock_2fa'), sub: 'Use Authenticator apps instead of SMS-based OTP if possible.', icon: <ShieldCheck /> }
                       ].map((item, i) => (
-                        <div key={i} className="p-8 rounded-[2rem] bg-white/5 border border-white/10 flex items-center justify-between group hover:border-[#FF3B3B]/40 transition-all">
+                        <button 
+                          key={i} 
+                          onClick={() => toggleAction(item.id)}
+                          className={`w-full p-6 md:p-8 rounded-2xl border flex items-center justify-between group transition-all duration-300 ${
+                            actionsCompleted[item.id] 
+                            ? 'bg-green-600/10 border-green-500/50' 
+                            : 'bg-white/5 border-white/10 hover:border-[#FF3B3B]/40'
+                          }`}
+                        >
                           <div className="flex items-center gap-6">
-                            <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center text-[#FF3B3B]">
-                              {item.icon}
+                            <div className={`w-12 h-12 rounded-xl flex items-center justify-center transition-colors ${actionsCompleted[item.id] ? 'bg-green-500 text-white' : 'bg-white/5 text-[#FF3B3B]'}`}>
+                              {actionsCompleted[item.id] ? <ShieldCheck className="w-6 h-6" /> : item.icon}
                             </div>
-                            <div>
-                              <h3 className="text-xl font-black text-white uppercase tracking-tight">{item.title}</h3>
-                              <p className="text-white/40 text-sm font-medium">{item.sub}</p>
+                            <div className="text-left">
+                              <h3 className={`text-lg font-black uppercase tracking-tight transition-colors ${actionsCompleted[item.id] ? 'text-green-500' : 'text-white'}`}>{item.title}</h3>
+                              <p className="text-white/40 text-[10px] md:text-xs font-medium">{item.sub}</p>
                             </div>
                           </div>
-                          <div className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center group-hover:border-[#FF3B3B] group-hover:bg-[#FF3B3B] transition-all">
-                            <ChevronRight className="w-4 h-4 text-white" />
+                          <div className={`w-6 h-6 rounded-full border flex items-center justify-center transition-all ${actionsCompleted[item.id] ? 'bg-green-500 border-green-500' : 'border-white/20'}`}>
+                            {actionsCompleted[item.id] ? <ShieldCheck className="w-3 h-3 text-white" /> : <ChevronRight className="w-3 h-3 text-white" />}
                           </div>
-                        </div>
+                        </button>
                       ))}
                     </div>
                   </motion.div>
@@ -196,13 +271,30 @@ export default function EmergencySOS({ isOpen, onClose }: { isOpen: boolean, onC
                       <p className="text-xl text-white/40 font-medium italic">{t('sos_vault_desc')}</p>
                     </div>
 
-                    <div className="h-80 rounded-[3rem] border-4 border-dashed border-white/10 hover:border-[#FF3B3B]/40 transition-all flex flex-col items-center justify-center text-center p-12 group">
-                      <div className="w-24 h-24 rounded-full bg-white/5 flex items-center justify-center text-white/20 mb-6 group-hover:scale-110 transition-transform">
-                        <Upload className="w-10 h-10" />
+                    <button 
+                      onClick={simulateUpload}
+                      disabled={uploadState !== 'idle'}
+                      className={`w-full h-64 rounded-[2rem] border-4 border-dashed transition-all flex flex-col items-center justify-center text-center p-8 group relative overflow-hidden ${
+                         uploadState === 'complete' ? 'border-green-500 bg-green-500/5' : 'border-white/10 hover:border-[#FF3B3B]/40'
+                      }`}
+                    >
+                      {uploadState === 'uploading' && (
+                        <motion.div 
+                          className="absolute inset-x-0 bottom-0 h-1 bg-green-500"
+                          initial={{ width: "0%" }}
+                          animate={{ width: "100%" }}
+                          transition={{ duration: 2 }}
+                        />
+                      )}
+                      
+                      <div className={`w-16 h-16 rounded-full flex items-center justify-center mb-6 transition-all ${uploadState === 'complete' ? 'bg-green-500 text-white' : 'bg-white/5 text-white/20 group-hover:scale-110'}`}>
+                        {uploadState === 'complete' ? <ShieldCheck className="w-8 h-8" /> : (uploadState === 'uploading' ? <Upload className="w-8 h-8 animate-bounce" /> : <Upload className="w-8 h-8" />)}
                       </div>
-                      <h3 className="text-2xl font-black text-white uppercase tracking-tight mb-2">{t('sos_drop_zone')}</h3>
-                      <p className="text-white/30 text-sm uppercase tracking-widest font-bold">Supports PNG, JPG, PDF (Max 10MB)</p>
-                    </div>
+                      <h3 className="text-xl font-black text-white uppercase tracking-tight mb-2">
+                        {uploadState === 'idle' ? t('sos_drop_zone') : (uploadState === 'uploading' ? 'HYPER_VAULT_UPLOADING...' : 'EVIDENCE_SECURED_LOCALLY')}
+                      </h3>
+                      <p className="text-white/30 text-[10px] uppercase tracking-widest font-bold">Supports PNG, JPG, PDF (Max 10MB)</p>
+                    </button>
                   </motion.div>
                 )}
 
@@ -229,8 +321,12 @@ export default function EmergencySOS({ isOpen, onClose }: { isOpen: boolean, onC
                             <p>I wish to report a phishing scam Occurred on {new Date().toLocaleDateString()}. Transaction ID: ________________. Impact: Possible financial theft...</p>
                           </div>
                         </div>
-                        <Button className="w-full h-16 rounded-2xl bg-[#FF3B3B] text-white font-black uppercase tracking-widest">
-                          <ShieldCheck className="mr-3 w-5 h-5" /> {t('sos_report_gen')}
+                        <Button 
+                          onClick={() => toggleAction('report')}
+                          className={`w-full h-16 rounded-2xl transition-all font-black uppercase tracking-widest ${actionsCompleted['report'] ? 'bg-green-600' : 'bg-[#FF3B3B]'}`}
+                        >
+                          <ShieldCheck className="mr-3 w-5 h-5" /> 
+                          {actionsCompleted['report'] ? 'REPORT_DELIVERED' : t('sos_report_gen')}
                         </Button>
                       </div>
 
@@ -268,21 +364,21 @@ export default function EmergencySOS({ isOpen, onClose }: { isOpen: boolean, onC
               <Button 
                 onClick={() => setStep(s => Math.max(1, s - 1))}
                 disabled={step === 1}
-                className="h-16 px-12 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 text-white font-black uppercase tracking-widest disabled:opacity-20"
+                className="h-12 px-8 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 text-white font-black uppercase tracking-widest disabled:opacity-20"
               >
                 Previous
               </Button>
               {step < 4 ? (
                 <Button 
                   onClick={() => setStep(s => Math.min(4, s + 1))}
-                  className="h-16 px-12 rounded-2xl bg-[#FF3B3B] hover:bg-[#FF3B3B]/90 text-white font-black uppercase tracking-widest ml-auto"
+                  className="h-12 px-8 rounded-xl bg-[#FF3B3B] hover:bg-[#FF3B3B]/90 text-white font-black uppercase tracking-widest ml-auto"
                 >
                   Continue Action
                 </Button>
               ) : (
                 <Button 
                   onClick={onClose}
-                  className="h-16 px-12 rounded-2xl bg-white text-black font-black uppercase tracking-widest ml-auto hover:bg-white/90 shadow-[0_0_30px_rgba(255,255,255,0.2)]"
+                  className="h-12 px-8 rounded-xl bg-white text-black font-black uppercase tracking-widest ml-auto hover:bg-white/90 shadow-[0_0_30px_rgba(255,255,255,0.2)]"
                 >
                   Exit Emergency Flow
                 </Button>
