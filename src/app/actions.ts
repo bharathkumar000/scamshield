@@ -117,3 +117,59 @@ export async function scanUrl(url: string) {
     };
   }
 }
+
+export async function explainScam(payload: string, type: string) {
+  // In a real app, this would call Gemini/OpenAI
+  // For the hackathon demo, we use a high-fidelity rule-based generator
+  await new Promise(r => setTimeout(r, 1000));
+  
+  const payloadLower = payload.toLowerCase();
+  
+  if (type === 'url') {
+    if (payloadLower.includes('bit.ly') || payloadLower.includes('tinyurl')) {
+      return "This link uses a URL shortener to hide the true destination. Scammers use this to bypass security filters and mask malicious domains.";
+    }
+    if (payloadLower.includes('reward') || payloadLower.includes('win') || payloadLower.includes('free')) {
+      return "The domain uses high-incentive keywords ('win', 'reward') to trigger a dopamine response, making you less likely to check for technical inconsistencies.";
+    }
+    return "The domain shows unusual registration patterns. It lacks standard enterprise security certificates and uses a high-risk Top Level Domain (TLD).";
+  }
+  
+  if (type === 'message' || type === 'call') {
+    if (payloadLower.includes('kyc') || payloadLower.includes('block') || payloadLower.includes('urgent')) {
+      return "This employs 'Artificial Urgency' and 'Authority Bias'. By threatening to block your account, the attacker forces you to act quickly without verifying the sender.";
+    }
+    if (payloadLower.includes('otp') || payloadLower.includes('pin')) {
+      return "Classic 'Credential Harvesting' attempt. No legitimate bank or service provider will ever ask for your OTP or PIN over a chat or call.";
+    }
+  }
+
+  return "Multiple forensic markers detected: suspicious sender metadata, linguistic pressure tactics, and non-standard redirection paths.";
+}
+
+export async function checkBreach(identifier: string) {
+  await new Promise(r => setTimeout(r, 1500));
+  
+  // Simulated Breach Database
+  const mockBreaches = [
+    { source: 'BigBasket Leak (2020)', details: 'Password, Address, Phone' },
+    { source: 'Air India Data Breach', details: 'Passport Info, Credit Card' },
+    { source: 'Dominos India Leak', details: 'Transaction History, Location' }
+  ];
+
+  if (identifier.includes('scam') || identifier.includes('test')) {
+    return {
+      found: true,
+      count: 3,
+      sources: mockBreaches,
+      riskLevel: 'Critical'
+    };
+  }
+
+  return {
+    found: Math.random() > 0.4,
+    count: Math.floor(Math.random() * 5) + 1,
+    sources: mockBreaches.slice(0, Math.floor(Math.random() * 3) + 1),
+    riskLevel: 'Moderate'
+  };
+}

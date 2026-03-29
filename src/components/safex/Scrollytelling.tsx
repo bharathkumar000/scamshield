@@ -85,7 +85,7 @@ const TerminalFrame = ({ children, title = "SYS_PROMPT", className = "" }: { chi
 );
 
 const Section = forwardRef<HTMLElement, { children: React.ReactNode, className?: string }>(({ children, className = "" }, ref) => (
-  <section ref={ref} className={`min-h-screen relative flex flex-col items-center justify-center overflow-hidden py-24 ${className}`}>
+  <section ref={ref} className={`min-h-screen relative flex flex-col items-center justify-center overflow-hidden py-20 ${className}`}>
     {children}
   </section>
 ));
@@ -402,11 +402,11 @@ export default function Scrollytelling({ onComplete }: { onComplete: () => void 
                           <Activity className="w-5 h-5 text-red-500" />
                           <span className="text-[10px] font-mono font-black uppercase text-red-500 tracking-[0.3em]">CASE_STUDY_REF:2026</span>
                        </div>
-                       <h2 className="text-3xl md:text-5xl font-sans font-black uppercase tracking-tighter leading-none mb-8 text-white">
+                       <h2 className="text-2xl md:text-4xl font-sans font-black uppercase tracking-tighter leading-none mb-8 text-white">
                           THE GAP BETWEEN 
                           <span className="block text-red-500 italic underline decoration-white/20">SCAM & ACTION</span>
                        </h2>
-                       <p className="text-lg md:text-2xl font-mono text-white/40 uppercase leading-relaxed italic border-l-2 border-red-500/20 pl-8 max-w-xl">
+                       <p className="text-sm md:text-lg font-mono text-white/40 uppercase leading-relaxed italic border-l-2 border-red-500/20 pl-8 max-w-xl">
                           {t('dt_sos_rationale')}
                        </p>
                     </div>
@@ -537,12 +537,12 @@ export default function Scrollytelling({ onComplete }: { onComplete: () => void 
            </div>
 
            <SlideIn direction="up" delay={0.8}>
-              <div className="pt-20 flex flex-col items-center">
+              <div className="pt-20 flex flex-col items-center justify-center">
                  <Button 
                    onClick={onComplete}
-                   className="h-24 px-16 md:px-32 rounded-xl bg-[#00FF9D] hover:bg-white text-black font-mono font-black uppercase tracking-[0.5em] text-2xl md:text-3xl transition-all shadow-[0_20px_80px_rgba(0,255,157,0.4)] hover:scale-105 active:scale-95 group relative overflow-hidden"
+                   className="h-16 px-12 rounded-xl bg-[#00FF9D] hover:bg-white text-black font-mono font-black uppercase tracking-widest text-lg md:text-xl transition-all shadow-[0_10px_40px_rgba(0,255,157,0.3)] hover:scale-105 active:scale-95 group relative overflow-hidden"
                  >
-                   LAUNCH_COMMAND_CENTER
+                   LAUNCH COMMAND CENTER
                  </Button>
                  
                  <div className="mt-20 opacity-20 flex flex-col items-center gap-6 font-mono">
