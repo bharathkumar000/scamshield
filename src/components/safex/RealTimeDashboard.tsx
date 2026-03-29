@@ -156,35 +156,40 @@ export default function RealTimeDashboard() {
               </TabsTrigger>
             </TabsList>
 
-            <TabsContent value="message" className="space-y-8 animate-in fade-in duration-500 w-full">
-              <div className="space-y-4 w-full">
-                <p className="text-sm font-black text-[#00FF9D]/80 uppercase tracking-[0.3em]">Paste Message Text</p>
-                <div className="relative group w-full">
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#00FF9D]/15 to-transparent blur-3xl opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <textarea 
-                    value={inputText}
-                    onChange={(e) => setInputText(e.target.value)}
-                    placeholder="e.g., Dear user, your account has been blocked. Immediate action required..."
-                    className="w-full h-64 bg-black/80 border-2 border-white/5 rounded-[2.5rem] p-10 text-2xl md:text-3xl text-white placeholder:text-white/5 focus:border-[#00FF9D]/60 focus:outline-none transition-all resize-none relative z-10 leading-relaxed shadow-2xl"
-                  />
-                </div>
-              </div>
-
-              <div className="flex flex-col gap-4">
-                <p className="text-[10px] font-bold text-white/40 uppercase tracking-widest">Quick Demo Scenarios:</p>
-                <div className="flex flex-wrap gap-2 md:gap-3">
-                  {['Phishing', 'Scam', 'Call', 'Payment'].map(s => (
-                    <Button 
-                      key={s} 
-                      variant="outline" 
-                      className="rounded-lg bg-white/5 border-white/10 hover:bg-[#00FF9D]/10 hover:border-[#00FF9D]/30 text-white/60 text-[10px] font-bold py-1 px-3"
-                      onClick={() => setInputText(`Scenario for ${s}: Verify your details now at bit.ly/secure-bank`)}
-                    >
-                      {s}
-                    </Button>
-                  ))}
-                </div>
-              </div>
+    <TabsContent value="message" className="space-y-8 animate-in fade-in duration-500 w-full">
+               <div className="space-y-4 w-full">
+                 <p className="text-sm font-black text-[#00FF9D]/80 uppercase tracking-[0.3em]">Paste Message Text</p>
+                 <div className="relative group w-full">
+                   <div className="absolute inset-0 bg-gradient-to-r from-[#00FF9D]/15 to-transparent blur-3xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                   <textarea 
+                     value={inputText}
+                     onChange={(e) => setInputText(e.target.value)}
+                     placeholder="e.g., Dear user, your account has been blocked. Immediate action required..."
+                     className="w-full h-64 bg-black/80 border-2 border-white/5 rounded-[2.5rem] p-10 text-2xl md:text-3xl text-white placeholder:text-white/5 focus:border-[#00FF9D]/60 focus:outline-none transition-all resize-none relative z-10 leading-relaxed shadow-2xl"
+                   />
+                 </div>
+               </div>
+ 
+               <div className="flex flex-col gap-4">
+                 <p className="text-[10px] font-bold text-white/40 uppercase tracking-widest">Quick Demo Scenarios:</p>
+                 <div className="flex flex-wrap gap-2 md:gap-3">
+                   {[
+                     { label: 'Phishing', text: 'Urgent: Your HDFC account will be blocked within 24 hours. Verify your KYC details now at bit.ly/hdfcb-secure to avoid termination.' },
+                     { label: 'Lottery', text: 'Congratulations! You have won a cash prize of ₹50,000 in our lucky draw. Click here to claim your reward instantly: reward-winner.xyz' },
+                     { label: 'Tech Support', text: 'Security Alert: Your PC has been infected with a Trojan. Immediate action required. Call 1800-SAFE-PC now or click here for support.' },
+                     { label: 'UPI Scam', text: 'Received: ₹2,000 from PhonePe. Click here to enter your UPI PIN and receive the amount in your bank account immediately.' }
+                   ].map(s => (
+                     <Button 
+                       key={s.label} 
+                       variant="outline" 
+                       className="rounded-lg bg-white/5 border-white/10 hover:bg-[#00FF9D]/10 hover:border-[#00FF9D]/30 text-white/60 text-[10px] font-bold py-1 px-3 h-auto"
+                       onClick={() => setInputText(s.text)}
+                     >
+                       {s.label}
+                     </Button>
+                   ))}
+                 </div>
+               </div>
 
               <Button 
                 onClick={handleScan}
@@ -197,30 +202,116 @@ export default function RealTimeDashboard() {
             </TabsContent>
 
             <TabsContent value="url" className="space-y-8 animate-in fade-in duration-500 w-full">
-              <div className="space-y-4 w-full">
-                <p className="text-sm font-black text-[#00FF9D]/80 uppercase tracking-[0.3em]">Scan Target URL</p>
-                <div className="relative group w-full">
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#00FF9D]/15 to-transparent blur-3xl opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <input 
-                    type="text"
-                    value={inputText}
-                    onChange={(e) => setInputText(e.target.value)}
-                    placeholder="e.g., https://bit.ly/secure-login-v4"
-                    className="w-full h-20 md:h-24 bg-black/80 border-2 border-white/5 rounded-[1.5rem] md:rounded-[2rem] px-10 text-2xl md:text-3xl text-white placeholder:text-white/5 focus:border-[#00FF9D]/60 focus:outline-none transition-all relative z-10 shadow-2xl"
-                  />
-                </div>
-              </div>
-              
-              <Button 
-                onClick={handleScan}
-                disabled={isScanning || !inputText}
-                className="w-full h-14 md:h-16 rounded-xl md:rounded-[1.5rem] bg-[#00FF9D] hover:bg-[#00FF9D]/90 text-black text-sm md:text-lg font-black uppercase tracking-widest mt-4 transition-all"
-              >
-                {isScanning ? <Loader2 className="w-5 h-5 md:w-6 md:h-6 animate-spin mr-2" /> : <Search className="w-4 h-4 md:w-5 md:h-5 mr-2" />}
-                Run Link Heuristics
-              </Button>
-            </TabsContent>
-          </Tabs>
+               <div className="space-y-4 w-full">
+                 <p className="text-sm font-black text-[#00FF9D]/80 uppercase tracking-[0.3em]">Scan Target URL</p>
+                 <div className="relative group w-full">
+                   <div className="absolute inset-0 bg-gradient-to-r from-[#00FF9D]/15 to-transparent blur-3xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                   <input 
+                     type="text"
+                     value={activeTab === 'url' ? inputText : ''}
+                     onChange={(e) => setInputText(e.target.value)}
+                     placeholder="e.g., https://bit.ly/secure-login-v4"
+                     className="w-full h-20 md:h-24 bg-black/80 border-2 border-white/5 rounded-[1.5rem] md:rounded-[2rem] px-10 text-2xl md:text-3xl text-white placeholder:text-white/5 focus:border-[#00FF9D]/60 focus:outline-none transition-all relative z-10 shadow-2xl"
+                   />
+                 </div>
+               </div>
+               
+               <Button 
+                 onClick={handleScan}
+                 disabled={isScanning || !inputText}
+                 className="w-full h-14 md:h-16 rounded-xl md:rounded-[1.5rem] bg-[#00FF9D] hover:bg-[#00FF9D]/90 text-black text-sm md:text-lg font-black uppercase tracking-widest mt-4 transition-all"
+               >
+                 {isScanning ? <Loader2 className="w-5 h-5 md:w-6 md:h-6 animate-spin mr-2" /> : <Search className="w-4 h-4 md:w-5 md:h-5 mr-2" />}
+                 Run Link Heuristics
+               </Button>
+             </TabsContent>
+
+             <TabsContent value="call" className="space-y-8 animate-in fade-in duration-500 w-full">
+               <div className="space-y-4 w-full">
+                 <p className="text-sm font-black text-[#00FF9D]/80 uppercase tracking-[0.3em]">VoIP / Telephony Stream</p>
+                 <div className="relative group w-full">
+                   <div className="absolute inset-0 bg-gradient-to-r from-[#00FF9D]/15 to-transparent blur-3xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                   <textarea 
+                     value={activeTab === 'call' ? inputText : ''}
+                     onChange={(e) => setInputText(e.target.value)}
+                     placeholder="e.g., Transcription: This is Mark from Windows support. Your computer has been compromised..."
+                     className="w-full h-64 bg-black/80 border-2 border-white/5 rounded-[2.5rem] p-10 text-2xl md:text-3xl text-white placeholder:text-white/5 focus:border-[#00FF9D]/60 focus:outline-none transition-all resize-none relative z-10 leading-relaxed shadow-2xl"
+                   />
+                 </div>
+               </div>
+               
+               <div className="flex flex-col gap-4">
+                 <p className="text-[10px] font-bold text-white/40 uppercase tracking-widest">Quick Demo Scenarios:</p>
+                 <div className="flex flex-wrap gap-2 md:gap-3">
+                   {[
+                     { label: 'Bank Fraud', text: 'Call from +91 9988776655: Hello, I am calling from the SBI Head Office. We have noticed an unauthorized transaction. Please share the OTP sent to your phone.' },
+                     { label: 'Insurance', text: 'Call from Unknown: Your insurance policy #8812 is expiring. Pay ₹5,000 immediately via this link to avoid lapse of benefits.' }
+                   ].map(s => (
+                     <Button 
+                       key={s.label} 
+                       variant="outline" 
+                       className="rounded-lg bg-white/5 border-white/10 hover:bg-[#00FF9D]/10 hover:border-[#00FF9D]/30 text-white/60 text-[10px] font-bold py-1 px-3 h-auto"
+                       onClick={() => setInputText(s.text)}
+                     >
+                       {s.label}
+                     </Button>
+                   ))}
+                 </div>
+               </div>
+
+               <Button 
+                 onClick={handleScan}
+                 disabled={isScanning || !inputText}
+                 className="w-full h-14 md:h-16 rounded-xl md:rounded-[1.5rem] bg-[#00FF9D] hover:bg-[#00FF9D]/90 text-black text-sm md:text-lg font-black uppercase tracking-widest mt-4 shadow-[0_0_30px_rgba(0,255,157,0.3)] transition-all"
+               >
+                 {isScanning ? <Loader2 className="w-5 h-5 md:w-6 md:h-6 animate-spin mr-2" /> : <PhoneIncoming className="w-4 h-4 md:w-5 md:h-5 mr-2" />}
+                 Analyze Voice Stream
+               </Button>
+             </TabsContent>
+
+             <TabsContent value="payment" className="space-y-8 animate-in fade-in duration-500 w-full">
+               <div className="space-y-4 w-full">
+                 <p className="text-sm font-black text-[#00FF9D]/80 uppercase tracking-[0.3em]">UPI / Payment Request Payload</p>
+                 <div className="relative group w-full">
+                   <div className="absolute inset-0 bg-gradient-to-r from-[#00FF9D]/15 to-transparent blur-3xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                   <textarea 
+                     value={activeTab === 'payment' ? inputText : ''}
+                     onChange={(e) => setInputText(e.target.value)}
+                     placeholder="e.g., Requesting ₹2,000 for 'Refund Process'..."
+                     className="w-full h-64 bg-black/80 border-2 border-white/5 rounded-[2.5rem] p-10 text-2xl md:text-3xl text-white placeholder:text-white/5 focus:border-[#00FF9D]/60 focus:outline-none transition-all resize-none relative z-10 leading-relaxed shadow-2xl"
+                   />
+                 </div>
+               </div>
+               
+               <div className="flex flex-col gap-4">
+                 <p className="text-[10px] font-bold text-white/40 uppercase tracking-widest">Quick Demo Scenarios:</p>
+                 <div className="flex flex-wrap gap-2 md:gap-3">
+                   {[
+                     { label: 'UPI Request', text: 'Incoming PhonePe Request: ₹1,999 for "Cashback Reward". Enter UPI PIN to receive money.' },
+                     { label: 'QR Scan', text: 'Scan this QR code to receive your ₹500 Scratch Card. (Points to phishing-gateway.in)' }
+                   ].map(s => (
+                     <Button 
+                       key={s.label} 
+                       variant="outline" 
+                       className="rounded-lg bg-white/5 border-white/10 hover:bg-[#00FF9D]/10 hover:border-[#00FF9D]/30 text-white/60 text-[10px] font-bold py-1 px-3 h-auto"
+                       onClick={() => setInputText(s.text)}
+                     >
+                       {s.label}
+                     </Button>
+                   ))}
+                 </div>
+               </div>
+
+               <Button 
+                 onClick={handleScan}
+                 disabled={isScanning || !inputText}
+                 className="w-full h-14 md:h-16 rounded-xl md:rounded-[1.5rem] bg-[#00FF9D] hover:bg-[#00FF9D]/90 text-black text-sm md:text-lg font-black uppercase tracking-widest mt-4 shadow-[0_0_30px_rgba(0,255,157,0.3)] transition-all"
+               >
+                 {isScanning ? <Loader2 className="w-5 h-5 md:w-6 md:h-6 animate-spin mr-2" /> : <Wallet2 className="w-4 h-4 md:w-5 md:h-5 mr-2" />}
+                 Verify Transaction
+               </Button>
+             </TabsContent>
+           </Tabs>
         </section>
       </main>
 

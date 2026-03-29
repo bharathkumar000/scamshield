@@ -8,10 +8,8 @@ import ScamAwarenessModule from '@/components/safex/ScamAwarenessModule';
 import ImpactDashboard from '@/components/safex/ImpactDashboard';
 import Scrollytelling from '@/components/safex/Scrollytelling';
 import EmergencySOS from '@/components/safex/EmergencySOS';
-import Hero from '@/components/safex/Hero';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '@/context/LanguageContext';
-import { Info } from 'lucide-react';
 
 export default function Home() {
   const { t } = useLanguage();
@@ -49,7 +47,6 @@ export default function Home() {
             </div>
 
             <div className="container mx-auto px-4 mt-20">
-              <Hero />
               <ProtectionSuite />
               <ScamAwarenessModule />
               <ImpactDashboard />
@@ -60,8 +57,6 @@ export default function Home() {
 
       {/* Emergency SOS Overlay */}
       <EmergencySOS isOpen={isSOSOpen} onClose={() => setIsSOSOpen(false)} />
-
-
 
       {/* Footer / Copyright */}
       <footer className="py-16 border-t border-white/5 bg-black/40 backdrop-blur-md relative overflow-hidden">
