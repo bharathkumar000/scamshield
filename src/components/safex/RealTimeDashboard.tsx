@@ -25,6 +25,7 @@ import {
   Info
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { scanUrl } from '@/app/actions';
 
 export default function RealTimeDashboard() {
   const { t } = useLanguage();
@@ -40,10 +41,19 @@ export default function RealTimeDashboard() {
     personalization: false
   });
 
-  const handleScan = () => {
+  const handleScan = async () => {
     if (!inputText) return;
     setIsScanning(true);
     setResult(null);
+
+    // LIVE API INTEGRATION FOR URLS!
+    if (activeTab === 'url') {
+      const liveResult = await scanUrl(inputText);
+      setResult(liveResult as any);
+      setIsScanning(false);
+      return;
+    }
+
     setTimeout(() => {
       setIsScanning(false);
       // Realistic simulation

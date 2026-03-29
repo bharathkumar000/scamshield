@@ -39,31 +39,20 @@ export default function Hero() {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] -z-10 blur-[120px] bg-gradient-to-tr from-[#00FF9D]/20 via-transparent to-transparent animate-pulse-subtle" />
       
       <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1 }}
-        className="mb-8 relative"
-      >
-        <div className="absolute inset-0 bg-[#00FF9D]/20 blur-3xl rounded-full" />
-        <img 
-          src="/hero_shield.png" 
-          alt="Safex Logo" 
-          className="w-48 h-48 md:w-64 md:h-64 object-contain relative z-10 drop-shadow-[0_0_30px_rgba(0,255,157,0.3)]"
-        />
-      </motion.div>
-
-      <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
+        className="mt-12"
       >
-        <h2 className="text-4xl md:text-7xl font-black mb-6 flex flex-col">
-          <span className="text-[#00FF9D]/80 text-lg uppercase tracking-[0.4em] font-bold mb-4">{t('subtitle')}</span>
-          <span className="text-gradient">ONE-SECOND WARNING</span>
+        <div className="mb-4 inline-block px-4 py-1 border border-[#00FF9D]/20 rounded-full text-[10px] font-black uppercase tracking-[0.3em] text-[#00FF9D]">
+          Next-Gen AI Cyber Defense
+        </div>
+        <h2 className="text-3xl md:text-6xl font-black mb-8 flex flex-col leading-[0.9] tracking-tighter">
+          <span className="text-white">SHIELDING YOUR</span>
+          <span className="text-[#00FF9D] drop-shadow-[0_0_20px_rgba(0,255,157,0.2)]">DIGITAL HORIZON</span>
         </h2>
-        <p className="text-white/70 max-w-2xl mx-auto mb-16 text-lg md:text-xl leading-relaxed font-medium">
-          AI-powered real-time detection for phishing links, suspicious UPI IDs, and fraudulent calls. 
-          Your frontline defense against cybercrime.
+        <p className="text-white/60 max-w-2xl mx-auto mb-16 text-lg md:text-xl leading-relaxed font-medium italic">
+          "The frontline defense against advanced phishing, UPI fraud, and cyber threats."
         </p>
       </motion.div>
 
