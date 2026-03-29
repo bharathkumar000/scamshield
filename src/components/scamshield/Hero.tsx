@@ -57,11 +57,11 @@ export default function Hero() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        <h2 className="text-4xl md:text-6xl font-black mb-4 flex flex-col">
-          <span className="text-white/60 text-sm uppercase tracking-[0.4em] mb-4">{t('subtitle')}</span>
+        <h2 className="text-4xl md:text-7xl font-black mb-6 flex flex-col">
+          <span className="text-[#00FF9D]/80 text-lg uppercase tracking-[0.4em] font-bold mb-4">{t('subtitle')}</span>
           <span className="text-gradient">ONE-SECOND WARNING</span>
         </h2>
-        <p className="text-white/40 max-w-xl mx-auto mb-12 text-sm md:text-base leading-relaxed">
+        <p className="text-white/70 max-w-2xl mx-auto mb-16 text-lg md:text-xl leading-relaxed font-medium">
           AI-powered real-time detection for phishing links, suspicious UPI IDs, and fraudulent calls. 
           Your frontline defense against cybercrime.
         </p>
