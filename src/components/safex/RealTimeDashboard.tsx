@@ -214,6 +214,25 @@ export default function RealTimeDashboard() {
                       className="w-full h-16 md:h-20 bg-black/80 border-2 border-white/5 rounded-xl md:rounded-2xl px-6 text-xl md:text-2xl text-white placeholder:text-white/5 focus:border-[#00FF9D]/60 focus:outline-none transition-all relative z-10 shadow-2xl"
                     />
                  </div>
+                <div className="flex flex-col gap-4">
+                  <p className="text-[10px] font-bold text-white/40 uppercase tracking-widest">Quick Demo Scenarios:</p>
+                  <div className="flex flex-wrap gap-2 md:gap-3">
+                    {[
+                      { label: 'Phishing', text: 'https://bit.ly/secure-login-v4' },
+                      { label: 'Homograph', text: 'https://arnazon-support.in/verify' },
+                      { label: 'Safe Domain', text: 'https://google.com/security/details' }
+                    ].map(s => (
+                      <Button 
+                        key={s.label} 
+                        variant="outline" 
+                        className="rounded-lg bg-white/5 border-white/10 hover:bg-[#00FF9D]/10 hover:border-[#00FF9D]/30 text-white/60 text-[10px] font-bold py-1 px-3 h-auto"
+                        onClick={() => setInputText(s.text)}
+                      >
+                        {s.label}
+                      </Button>
+                    ))}
+                  </div>
+                </div>
                </div>
                
                <Button 
